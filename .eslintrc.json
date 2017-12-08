@@ -1,0 +1,16 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+        }
+    },
+    "env": {
+        "browser": true
+    },
+    "plugins": ["html","vue"],
+    "extends":["plugin:vue/recommended"],
+    "rules": {
+        "semi": 2
+    }
+}
