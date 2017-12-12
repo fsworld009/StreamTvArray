@@ -64,9 +64,7 @@ export default {
   }),
   methods: {
     openStreamOptions(streamOptions){
-      this.streamOptions = Object.assign({
-       closeIcon: true 
-      }, {streamOptions: streamOptions});
+      this.streamOptions = streamOptions;
     },
     onCloseOptionsModal(){
       this.streamOptions = null;

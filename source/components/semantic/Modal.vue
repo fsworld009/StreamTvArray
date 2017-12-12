@@ -10,6 +10,9 @@
     </div>
 
     <div class="actions">
+      <template v-for="(button, index) in options.actions">
+        <SeButton :key="index" :class="'ui button '+button.styleClasses" @click="button.onClick||function(){}">{{button.text}}</SeButton>
+      </template>
       <!-- <button class="ui button red inverted cancel">Close</button> -->
     </div>
   </div>
@@ -17,7 +20,11 @@
 
 
 <script>
+import SeButton from './Button.vue';
 export default {
+  components: {
+    SeButton
+  },
   props: {
     options: {
       type: Object,
@@ -65,8 +72,6 @@ export default {
       console.log("options", options);
       $modal.modal(options);
     }
-  },
-  components: {
   }
 }
 </script>
