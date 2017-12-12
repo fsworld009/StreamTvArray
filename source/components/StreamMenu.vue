@@ -4,7 +4,7 @@
       <i class="big list layout icon blue" ></i>
       <div class="ui menu inverted blue tablet or lower only">
         <template v-for="(menu, index) in menuItems">
-          <a  :key="index" :href="'javascript:void(0)'" class="item text white" :target="menu.target||''"><i :class="'icon '+menu.icon"></i> {{menu.text}}</a>
+          <a  :key="index" :href="'javascript:void(0)'" class="item text white" :target="menu.target||''" @click="emit(menu.action)"><i :class="'icon '+menu.icon"></i> {{menu.text}}</a>
         </template>
       </div>
     </div>
@@ -13,11 +13,18 @@
 
 <script>
 export default {
+  props: {
+    stream: {
+      type: Object
+    }
+  },
   data(){
     return {
+      
       menuItems: [
-        {icon: "info", text: "test"},
-        {icon: "info", text: "test2"}
+        {icon: "comment", text: "Toggle Chat", action:"toggleChat"},
+        {icon: "setting", text: "Stream Options", action:"streamOptions"},
+        {icon: "puzzle", text: "Array Options", action:"arrayOptions"}
       ]
     };
   },
@@ -31,7 +38,13 @@ export default {
   },
 
   beforeDestroy(){
-    (this.$el).find(".ui.dropdown").dropdown('destroy')
+    $(this.$el).find(".ui.dropdown").dropdown('destroy')
+  },
+
+  methods: {
+    emit(actionName){
+      this.$emit("select", this.stream, actionName);
+    }
   }
 }
 </script>

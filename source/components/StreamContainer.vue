@@ -6,7 +6,7 @@
 
           <div class="stream-col" v-if="stream.channel" :key="col" :style="style">
             <component :is="'StreamTwitch'" :options="stream"  style="style"/>
-            <StreamMenu/>
+            <StreamMenu @select="onSelectMenu" :stream="stream"/>
           </div>
           
           <div class="stream-col add-icon" :key="col" v-else :style="style" @click="openStreamOptions(stream)">
@@ -27,6 +27,7 @@ import {mapState} from 'vuex';
 import StreamTwitch from './StreamTwitch.vue';
 import StreamOptions from './StreamOptions.vue';
 import StreamMenu from './StreamMenu.vue';
+import {UPDATE_STREAM} from '../mutations.js';
 
 export default {
   components: {
@@ -74,6 +75,20 @@ export default {
     },
     onCloseOptionsModal(){
       this.streamOptions = null;
+    },
+    onSelectMenu(stream, action){
+      console.log("select",stream, action, stream.id)
+      switch(action){
+        case "toggleChat":
+          this.$store.commit({
+            type: UPDATE_STREAM,
+            options: {
+              id: stream.id,
+              showChat: !stream.showChat
+            }
+          })
+        break;
+      }
     }
   }
 }

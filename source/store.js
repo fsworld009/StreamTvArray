@@ -38,8 +38,8 @@ const store = new Vuex.Store({
       [UPDATE_STREAM](state, payload){
           console.log(UPDATE_STREAM, payload);
           var options = payload.options;
-          var id = payload.id;
-          state.streams[id] = options;
+          var id = options.id;
+          state.streams[id] = Object.assign(state.streams[id], {showChat: true}, options);
       }
     }
   });

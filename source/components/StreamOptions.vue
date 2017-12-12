@@ -12,13 +12,13 @@
         </div>
       </div>
       <div class="fields">
-        <div class="four wide field">
+        <!-- <div class="four wide field">
           <Label><h5>&nbsp</h5></Label>
           <SeCheckbox name="showChat" :checked="(typeof options.showChat === 'undefined'? true: showChat)">Show Chat</SeCheckbox>
-        </div>
-        <div class="twelve wide field">
+        </div> -->
+        <div class="sixteen wide field">
           <Label><h5>Chat Transparency (0~100)</h5></Label>
-          <SeInput name="chatOpacity" :value="options.chatOpacity || 0"></SeInput>
+          <SeInput name="chatOpacity" :value="options.chatOpacity || 50"></SeInput>
         </div>
       </div>
     </SeForm>
@@ -83,7 +83,7 @@ export default {
         data[field.name] = field.value || true;
       });
 
-      var options = Object.assign(this.options,data);
+      var options = Object.assign(this.options, data);
 
 
       this.$store.commit({
