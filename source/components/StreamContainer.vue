@@ -57,11 +57,10 @@ export default {
       //restructure streams object into nested presentation
       var w,h,id=0;
       var streams=[];
-      console.log("state",state)
       for(h=0;h<state.height;h++){
         var colStreams = []; 
         for(w=0;w<state.width;w++){
-          id = h*state.height + w;
+          id = state.width==1? h: h*state.height + w;
           colStreams.push(state.streams[id]);
         }
         streams.push(colStreams);
