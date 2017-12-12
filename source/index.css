@@ -9,6 +9,12 @@
     box-sizing: border-box;
   }
 
+  .stream-cell {
+      position: relative;
+      width: 100%;
+      height:  100%;
+  }
+
   .stream-col.add-icon {
     text-align: center;
     opacity: 0;
@@ -46,7 +52,7 @@
     width: 25%;
     height: calc(100% - 35px);
     z-index: 3;
-    opacity: 0.2;
+    opacity: 0;
     transition: opacity 0.5s;
   }
   
@@ -54,12 +60,18 @@
     opacity: 1;
     height: 100%;
   }
+
+  .stream-col:hover > .stream-menu {
+      opacity: 1;
+  }
   
   .stream-menu {
     position: absolute;
     left: 5px;
     top: 5px;
     z-index: 3;
+    opacity: 0;
+    transition: opacity 0.5s;
   }
   
   .stream-overlay {

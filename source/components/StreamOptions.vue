@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="field">
-            <SeCheckbox name="show-chat" :checked="(typeof options.showChat === 'undefined'? true: showChat)">Show Chat</SeCheckbox>
+            <SeCheckbox name="showChat" :checked="(typeof options.showChat === 'undefined'? true: showChat)">Show Chat</SeCheckbox>
         </div>
     </SeForm>
   </Modal>
@@ -24,6 +24,7 @@ import SeForm from './semantic/Form.vue';
 import Dropdown from './semantic/Dropdown.vue';
 import SeInput from './semantic/Input.vue';
 import SeCheckbox from './semantic/Checkbox.vue';
+import {UPDATE_STREAM} from '../mutations.js';
 
 export default {
   props: {
@@ -44,7 +45,7 @@ export default {
       modalOptions: {
         closeIcon: true,
         actions: [
-          {text: "Apply", styleClasses: "green"},
+          {text: this.options.channel? "Apply" : "Open", styleClasses: "green", action: this.applyOption.bind(this)},
           {text: "Close", styleClasses: "red cancel"}
         ]
       },
@@ -59,6 +60,29 @@ export default {
 
   methods: {
     onCloseModal(){
+      this.$emit("close");
+    },
+    applyOption(){
+      var $el = $(this.$el);
+      var data = {};
+      $el.find('form').find('input, textarea').each(function(i, field) {
+        if($(this).attr("type") != "checkbox" && $(this).attr("type") != "radio"){
+          if(field.name){
+            data[field.name] = field.value;
+          }
+        }
+      });
+      $el.find('form').find('input:checked').each(function(i, field) {
+        data[field.name] = field.value || true;
+      });
+
+      var options = Object.assign(this.options,data);
+
+
+      this.$store.commit({
+        type: UPDATE_STREAM,
+        options: options
+      })
       this.$emit("close");
     }
   }

@@ -8,7 +8,7 @@
 export default {
   methods: {
     onClick(event){
-      this.$emit("click");
+      this.$emit("click", event);
     }
   }
 }

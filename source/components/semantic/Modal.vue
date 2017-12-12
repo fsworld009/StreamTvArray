@@ -11,7 +11,7 @@
 
     <div class="actions">
       <template v-for="(button, index) in options.actions">
-        <SeButton :key="index" :class="'ui button '+button.styleClasses" @click="button.onClick||function(){}">{{button.text}}</SeButton>
+        <SeButton :key="index" :class="'ui button '+button.styleClasses" @click="onAction(button.action)">{{button.text}}</SeButton>
       </template>
       <!-- <button class="ui button red inverted cancel">Close</button> -->
     </div>
@@ -71,6 +71,12 @@ export default {
       }, this.options);
       console.log("options", options);
       $modal.modal(options);
+    },
+
+    onAction(action){
+      if(typeof action == "function"){
+        action();
+      }
     }
   }
 }

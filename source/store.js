@@ -2,7 +2,7 @@ import Vuex from 'vuex';
 import Vue from 'vue';
 Vue.use(Vuex);
 var _ = require("lodash");
-import {RESET_ARRAY} from "./mutations.js";
+import {RESET_ARRAY, UPDATE_STREAM} from "./mutations.js";
 
 const store = new Vuex.Store({
     state: {
@@ -34,6 +34,12 @@ const store = new Vuex.Store({
             }
         }
 
+      },
+      [UPDATE_STREAM](state, payload){
+          console.log(UPDATE_STREAM, payload);
+          var options = payload.options;
+          var id = payload.id;
+          state.streams[id] = options;
       }
     }
   });

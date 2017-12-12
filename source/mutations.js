@@ -1,2 +1,2 @@
 export const RESET_ARRAY = 'RESET_ARRAY';
-export const OPEN_STREAM = 'OPEN_STREAM';
+export const UPDATE_STREAM = 'UPDATE_STREAM';
