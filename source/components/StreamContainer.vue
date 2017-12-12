@@ -4,7 +4,8 @@
       <div class="stream-row" :key="row">
         <template v-for="(stream, col) in streamRow" >
           <component :is="'StreamTwitch'" :key="col" v-if="stream.channel" :style="style"/>
-          <div class="stream-col add-icon" :key="col" v-else :style="style">
+          
+          <div class="stream-col add-icon" :key="col" v-else :style="style" @click="addStream(stream.id)">
             <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i>
           </div>
         </template>
@@ -51,6 +52,11 @@ export default {
         height: (100/state.height)+'vh',
       }
     }
-  })
+  }),
+  methods: {
+    addStream(streamId){
+      console.log("streamId", streamId);
+    }
+  }
 }
 </script>

@@ -10,6 +10,7 @@
   }
 
   .stream-col.add-icon {
+    text-align: center;
     opacity: 0;
     transition: opacity 0.5s;
   }
@@ -21,8 +22,6 @@
   }
 
   .stream-col.add-icon > i {
-      position: absolute;
-      left: 25%;
       line-height: 1em;
   }
   
