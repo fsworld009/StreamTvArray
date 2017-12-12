@@ -40,7 +40,9 @@ export default {
     this.showModal();
   },
   beforeDestroy(){
+    console.log("beforeDestroy");
     var $modal = $(this.$el);
+    $modal.modal('hide');
     $modal.modal('destroy');
   }, 
   methods: {

@@ -6,8 +6,24 @@
   .stream-col {
     position: relative;
     float: left;
-    width: 50vw;
-    height: 50vh;
+    box-sizing: border-box;
+  }
+
+  .stream-col.add-icon {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .stream-col.add-icon:hover {
+    cursor: pointer;
+    opacity: 1;
+    border: 0.5em solid white;
+  }
+
+  .stream-col.add-icon > i {
+      position: absolute;
+      left: 25%;
+      line-height: 1em;
   }
   
   body {

@@ -25,6 +25,15 @@ const store = new Vuex.Store({
       [RESET_ARRAY](state, payload){
         state.width = Number(payload.width);
         state.height = Number(payload.height);
+
+        for(let i=0; i< state.width*state.height; i++){
+            if(!state.streams[i]){
+                state.streams[i] = {
+                    id: i
+                };
+            }
+        }
+
       }
     }
   });
