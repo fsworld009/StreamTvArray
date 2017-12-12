@@ -42,7 +42,7 @@ import SeButton from './semantic/Button.vue';
 import SeInput from './semantic/Input.vue';
 import Dropdown from './semantic/Dropdown.vue';
 var _ = require("lodash");
-import {RESET_ARRAY} from '../vuex/mutations.js';
+import {RESET_ARRAY} from '../mutations.js';
 
 export default {
   components: {
