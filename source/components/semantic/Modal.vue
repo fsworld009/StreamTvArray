@@ -1,6 +1,6 @@
 <template>
   <div class="ui modal">
-    <i class="close icon" v-if="options.closeIcon"></i>
+    <i class="close icon" v-if="!options.closable && options.closeIcon"></i>
     <div class="header">
       <h2 class="ui header blue">{{options.title}}
       </h2>
@@ -21,7 +21,7 @@ export default {
   props: {
     options: {
       type: Object,
-      default: {}
+      default(){return {};}
     }
     // project: {
     //   type: Object
@@ -56,12 +56,13 @@ export default {
 
     createModal(){
       var $modal = $(this.$el);
-
+      
       var options = Object.assign({
         onHidden: () => {
-          this.$emit("closeModal");
+          this.$emit("close");
         }
       }, this.options);
+      console.log("options", options);
       $modal.modal(options);
     }
   },

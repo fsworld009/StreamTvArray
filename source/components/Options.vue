@@ -101,6 +101,7 @@ export default {
           height: data.height
         }
       )
+      $el.modal('hide');
     }
   }
 }

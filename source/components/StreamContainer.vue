@@ -5,14 +5,14 @@
         <template v-for="(stream, col) in streamRow" >
           <component :is="'StreamTwitch'" :key="col" v-if="stream.channel" :style="style"/>
           
-          <div class="stream-col add-icon" :key="col" v-else :style="style" @click="addStream(stream.id)">
+          <div class="stream-col add-icon" :key="col" v-else :style="style" @click="openStreamOptions(stream)">
             <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i>
           </div>
         </template>
       </div>
     </template>
+    <StreamOptions v-if="streamOptions !== null" :options="streamOptions" @close="onCloseOptionsModal"></StreamOptions>
 
-    
   </div>
 
 </template>
@@ -21,10 +21,17 @@
 <script>
 import {mapState} from 'vuex';
 import StreamTwitch from './StreamTwitch.vue';
+import StreamOptions from './StreamOptions.vue';
 
 export default {
   components: {
+    StreamOptions,
     StreamTwitch
+  },
+  data(){
+    return {
+      streamOptions: null
+    }
   },
   computed: mapState({
     width(state){
@@ -56,8 +63,13 @@ export default {
     }
   }),
   methods: {
-    addStream(streamId){
-      console.log("streamId", streamId);
+    openStreamOptions(streamOptions){
+      this.streamOptions = Object.assign({
+       closeIcon: true 
+      }, {streamOptions: streamOptions});
+    },
+    onCloseOptionsModal(){
+      this.streamOptions = null;
     }
   }
 }
