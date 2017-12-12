@@ -45,7 +45,7 @@
 
 <script>
 import Options from './components/Options.vue';
-import {mapState} from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
   components: {
@@ -65,11 +65,7 @@ export default {
     };
   },
 
-  computed: mapState({
-    showOptions(state){
-      return state.width==0 && state.height==0;
-    }
-  }),
+  computed: mapGetters(['showOptions']),
 
   mounted(){
     $(this.$el).find(".ui.dropdown").dropdown({

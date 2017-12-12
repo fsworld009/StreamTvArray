@@ -1,2 +1,1 @@
-export const SOME_MUTATION = 'SOME_MUTATION';
-export const SOME_MUTATION2 = 'SOME_MUTATION2';
+export const RESET_ARRAY = 'RESET_ARRAY';

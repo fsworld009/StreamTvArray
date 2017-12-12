@@ -1,6 +1,6 @@
 <template>
   <div class="ui modal">
-    <i class="close icon"></i>
+    <i class="close icon" v-if="options.closeIcon"></i>
     <div class="header">
       <h2 class="ui header blue">{{options.title}}
       </h2>

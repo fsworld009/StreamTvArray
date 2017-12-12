@@ -9,16 +9,16 @@
               <SeInput name="width" :value="width" size="2"/>  
               x       
               <SeInput name="height" :value="height" size="2"/>
-              <SeButton class="green reset-array">Apply</SeButton>
+              <SeButton class="green" @click="changeArraySize">Apply</SeButton>
           </div>
           <div class="column">
-            <h5 class="ui dividing header">Load Sessions</h5>
+            <!-- <h5 class="ui dividing header">Load Sessions</h5>
             <div class="ui grid">
               <div class="thirteen wide column">
                 <Dropdown name="session" :items="savedSessionsTest" placeholder="Select Session"/>
               </div>
               <div class="one wide column"><SeButton class="green load-session">Load</SeButton></div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -41,6 +41,8 @@ import Segment from './semantic/Segment.vue';
 import SeButton from './semantic/Button.vue';
 import SeInput from './semantic/Input.vue';
 import Dropdown from './semantic/Dropdown.vue';
+var _ = require("lodash");
+import {RESET_ARRAY} from '../vuex/mutations.js';
 
 export default {
   components: {
@@ -51,15 +53,12 @@ export default {
     SeButton,
     Dropdown
   },
-  data(){
-    var state = this.$store.state;
-    return {
-      modalOptions: {
-        title: "Options",
-        closable: false
-      }
-    }
-  },
+  // data(){
+  //   var state = this.$store.state;
+  //   return {
+      
+  //   }
+  // },
   computed: mapState({
     // showSaveLoadSection(state){
     //   return state.savedSessions.length > 0;
@@ -76,7 +75,33 @@ export default {
         {text:"[1x3] ch1...,ch2...,ch3", value: 2}
       ];
       
+    },
+
+    modalOptions(state){
+      return {
+        title: "Options",
+        closable: false,
+        closeIcon: state.width != 0 && state.height != 0
+      };
     }
-  })
-};
+  }),
+
+  methods: {
+    changeArraySize(event){
+      //validation?
+      var $el = $(this.$el);
+      var data = {};
+      $el.find('form').find('input, textarea, select').each(function(i, field) {
+        data[field.name] = field.value;
+      });
+      this.$store.commit(
+        {
+          type: RESET_ARRAY,
+          width: data.width,
+          height: data.height
+        }
+      )
+    }
+  }
+}
 </script>
