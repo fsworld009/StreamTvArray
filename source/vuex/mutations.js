@@ -1,0 +1,2 @@
+export const SOME_MUTATION = 'SOME_MUTATION';
+export const SOME_MUTATION2 = 'SOME_MUTATION2';

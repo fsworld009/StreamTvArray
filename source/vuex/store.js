@@ -4,8 +4,11 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
     state: {
-      count: 0,
-      message: "Hello World"
+      sessionId: 1,
+      width: 0,
+      height: 0,
+      streams: [],
+      savedSessions: {}
     },
     mutations: {
       increment (state) {

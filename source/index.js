@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Index from './Index.vue';
-import store from './store.js';
+import store from './vuex/store.js';
 
 require('./semantic/semantic.css');
 require('./semantic/semantic.js');

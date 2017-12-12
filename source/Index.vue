@@ -34,14 +34,16 @@
     </div>
   </div> -->
   <div>
-    {{this.message}}
+    <Options></Options>
   </div>
 </template>
 
 <script>
+import Options from './components/Options.vue';
+
 export default {
   components: {
-    
+    Options
   },
   
   data (){
