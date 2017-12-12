@@ -83,7 +83,7 @@ export default {
         data[field.name] = field.value || true;
       });
 
-      var options = Object.assign(this.options, data);
+      var options = Object.assign({}, this.options, data);
 
 
       this.$store.commit({

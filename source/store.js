@@ -28,9 +28,9 @@ const store = new Vuex.Store({
 
         for(let i=0; i< state.width*state.height; i++){
             if(!state.streams[i]){
-                state.streams[i] = {
+                Vue.set(state.streams, i, {
                     id: i
-                };
+                });
             }
         }
 
@@ -39,7 +39,8 @@ const store = new Vuex.Store({
           console.log(UPDATE_STREAM, payload);
           var options = payload.options;
           var id = options.id;
-          state.streams[id] = Object.assign(state.streams[id], {showChat: true}, options);
+        //   Vue.set(state.streams, id, Object.assign({showChat: true}, state.streams[id], options));
+        state.streams[id] = Object.assign({showChat: true}, state.streams[id], options);
       }
     }
   });
