@@ -1,5 +1,5 @@
 <template>
-  <component :is="'input'" type="text"></component>
+  <component :is="'input'" class="ui input" type="text"></component>
 </template>
 
 

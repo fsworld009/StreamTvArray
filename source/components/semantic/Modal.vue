@@ -1,12 +1,12 @@
 <template>
   <div class="ui modal">
-    <!-- <i class="close icon"></i> -->
+    <i class="close icon"></i>
     <div class="header">
-      <h2 class="ui header blue">test2
+      <h2 class="ui header blue">{{options.title}}
       </h2>
     </div>
-    <div class="scrolling content">
-      test
+    <div class=" content"><!-- scrolling-->
+      <slot></slot>
     </div>
 
     <div class="actions">
@@ -19,6 +19,10 @@
 <script>
 export default {
   props: {
+    options: {
+      type: Object,
+      default: {}
+    }
     // project: {
     //   type: Object
     // }
@@ -50,11 +54,13 @@ export default {
 
     createModal(){
       var $modal = $(this.$el);
-      $modal.modal({
+
+      var options = Object.assign({
         onHidden: () => {
           this.$emit("closeModal");
         }
-      });
+      }, this.options);
+      $modal.modal(options);
     }
   },
   components: {

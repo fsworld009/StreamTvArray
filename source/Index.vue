@@ -34,12 +34,18 @@
     </div>
   </div> -->
   <div>
-    <Options></Options>
+    <template v-if="showOptions">
+      <Options></Options>
+    </template>
+    <template v-else>
+      Configured: {{width}}*{{height}}
+    </template>
   </div>
 </template>
 
 <script>
 import Options from './components/Options.vue';
+import {mapState} from 'vuex';
 
 export default {
   components: {
@@ -47,19 +53,23 @@ export default {
   },
   
   data (){
+    var state = this.$store.state;
     return {
-      menuItems: [
-        {link: "#", icon: "info", text: "test"},
-        {link: "#", icon: "info", text: "test2"}
-      ]
+      width: state.width,
+      height: state.height
+
+      // menuItems: [
+      //   {link: "#", icon: "info", text: "test"},
+      //   {link: "#", icon: "info", text: "test2"}
+      // ]
     };
   },
 
-  computed:{
-    message(){
-      return this.$store.state.message;
+  computed: mapState({
+    showOptions(state){
+      return state.width==0 && state.height==0;
     }
-  },
+  }),
 
   mounted(){
     $(this.$el).find(".ui.dropdown").dropdown({

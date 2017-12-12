@@ -1,15 +1,82 @@
 <template>
-  <Modal>
-    
+  <Modal :options="modalOptions">
+    <SeForm>
+      <div class="ui grid">
+        <div class="two column row">
+          <div class="column">
+            <h5 class="ui dividing header">Array Size</h5>
+            
+              <SeInput name="width" :value="width" size="2"/>  
+              x       
+              <SeInput name="height" :value="height" size="2"/>
+              <SeButton class="green reset-array">Apply</SeButton>
+          </div>
+          <div class="column">
+            <h5 class="ui dividing header">Load Sessions</h5>
+            <div class="ui grid">
+              <div class="thirteen wide column">
+                <Dropdown name="session" :items="savedSessionsTest" placeholder="Select Session"/>
+              </div>
+              <div class="one wide column"><SeButton class="green load-session">Load</SeButton></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </SeForm>
   </Modal>
 </template>
 
+<<style scoped>
+.ui.form input[type="text"][name="width"], .ui.form input[type="text"][name="height"]{
+  width: 50px;
+}
+</style>
+
+
 <script>
+import {mapState} from 'vuex';
 import Modal from './semantic/Modal.vue';
+import SeForm from './semantic/Form.vue';
+import Segment from './semantic/Segment.vue';
+import SeButton from './semantic/Button.vue';
+import SeInput from './semantic/Input.vue';
+import Dropdown from './semantic/Dropdown.vue';
 
 export default {
   components: {
-    Modal
-  }
+    Modal,
+    SeForm,
+    Segment,
+    SeInput,
+    SeButton,
+    Dropdown
+  },
+  data(){
+    var state = this.$store.state;
+    return {
+      modalOptions: {
+        title: "Options",
+        closable: false
+      }
+    }
+  },
+  computed: mapState({
+    // showSaveLoadSection(state){
+    //   return state.savedSessions.length > 0;
+    // },
+    width(state){
+      return state.width==0? 2: state.width;
+    },
+    height(state){
+      return state.height==0? 2: state.height;
+    },
+    savedSessionsTest(state){
+      return [
+        {text:"[2x2] ch1...,ch2...,ch3...,ch4...", value: 1},
+        {text:"[1x3] ch1...,ch2...,ch3", value: 2}
+      ];
+      
+    }
+  })
 };
 </script>

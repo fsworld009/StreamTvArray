@@ -1,6 +1,7 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
 Vue.use(Vuex);
+var _ = require("lodash");
 
 const store = new Vuex.Store({
     state: {
@@ -8,7 +9,12 @@ const store = new Vuex.Store({
       width: 0,
       height: 0,
       streams: [],
-      savedSessions: {}
+      savedSessions: []
+    },
+    getters: {
+      savedSessionsById(state){
+        return _.keyBy(state.savedSessions, "id");
+      }
     },
     mutations: {
       increment (state) {
