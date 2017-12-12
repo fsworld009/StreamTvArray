@@ -2,18 +2,25 @@
   <Modal @close="onCloseModal" :options="modalOptions">
     <SeForm>
       <div class="fields">
-          <div class="four wide field">
-            <label for=""><h5>Site</h5></label>
-            <Dropdown name="site" :items="sites" :value="options.site || 'twitch'"></Dropdown>
-          </div>
-          <div class="twelve wide field">
-            <label for=""><h5>Channel ID</h5></label>
-            <SeInput name="channel" :value="options.channel"></SeInput>
-          </div>
+        <div class="four wide field">
+          <label for=""><h5>Site</h5></label>
+          <Dropdown name="site" :items="sites" :value="options.site || 'twitch'"></Dropdown>
         </div>
-        <div class="field">
-            <SeCheckbox name="showChat" :checked="(typeof options.showChat === 'undefined'? true: showChat)">Show Chat</SeCheckbox>
+        <div class="twelve wide field">
+          <label for=""><h5>Channel ID</h5></label>
+          <SeInput name="channel" :value="options.channel"></SeInput>
         </div>
+      </div>
+      <div class="fields">
+        <div class="four wide field">
+          <Label><h5>&nbsp</h5></Label>
+          <SeCheckbox name="showChat" :checked="(typeof options.showChat === 'undefined'? true: showChat)">Show Chat</SeCheckbox>
+        </div>
+        <div class="twelve wide field">
+          <Label><h5>Chat Transparency (0~100)</h5></Label>
+          <SeInput name="chatOpacity" :value="options.chatOpacity || 0"></SeInput>
+        </div>
+      </div>
     </SeForm>
   </Modal>
 </template>

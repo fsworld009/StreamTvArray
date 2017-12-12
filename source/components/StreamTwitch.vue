@@ -1,12 +1,12 @@
 <template>
   <div class="stream-cell">
     <iframe class="stream" :src="'https://player.twitch.tv/?channel='+options.channel" frameborder="0" allowfullscreen="true" scrolling="no" ></iframe>
-        <div class="chat-container" v-if="options.showChat">
-          <iframe :src="'https://www.twitch.tv/'+options.channel+'/chat?popout=true'" frameborder="0" scrolling="no" ></iframe>
+        <div class="chat-container" v-if="options.showChat" :style="chatStyle">
+          <iframe :src="'https://www.twitch.tv/'+options.channel+'/chat?popout=true'" frameborder="0" scrolling="no"></iframe>
         </div>
-        <div class="stream-overlay">
+        <!-- <div class="stream-overlay">
 
-        </div>
+        </div> -->
   </div>
 </template>
 
@@ -16,6 +16,13 @@ export default {
     options:{
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    chatStyle(){
+      return {
+        opacity: this.options.chatOpacity? (this.options.chatOpacity/100) : 0
+      }
     }
   }
 }

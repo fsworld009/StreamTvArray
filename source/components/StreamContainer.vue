@@ -6,16 +6,7 @@
 
           <div class="stream-col" v-if="stream.channel" :key="col" :style="style">
             <component :is="'StreamTwitch'" :options="stream"  style="style"/>
-            <div class="stream-menu">
-              <div class="ui pointing dropdown top left item">
-                <i class="big list layout icon blue" ></i>
-                <div class="ui menu inverted blue tablet or lower only">
-                  <template v-for="(menu, index) in menuItems">
-                    <a  :key="index" :href="menu.link" class="item text white" :target="menu.target||''"><i :class="'icon '+menu.icon"></i> {{menu.text}}</a>
-                  </template>
-                </div>
-              </div>
-            </div>
+            <StreamMenu/>
           </div>
           
           <div class="stream-col add-icon" :key="col" v-else :style="style" @click="openStreamOptions(stream)">
@@ -35,15 +26,18 @@
 import {mapState} from 'vuex';
 import StreamTwitch from './StreamTwitch.vue';
 import StreamOptions from './StreamOptions.vue';
+import StreamMenu from './StreamMenu.vue';
 
 export default {
   components: {
     StreamOptions,
-    StreamTwitch
+    StreamTwitch,
+    StreamMenu
   },
   data(){
     return {
       streamOptions: null
+      
     }
   },
   computed: mapState({
