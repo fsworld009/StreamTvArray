@@ -1,7 +1,7 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
 Vue.use(Vuex);
-var _ = require("lodash");
+// var _ = require("lodash");
 import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS} from "./mutations.js";
 
 
@@ -16,6 +16,14 @@ var initialState =  Object.assign({
     showOptionFlag: false
   //   savedSessions: []
   }, JSON.parse(session));
+
+  Object.keys(initialState.streams).forEach((streamId)=>{
+      console.log("streamId",streamId, initialState.streams);
+    let streamOptions = initialState.streams[streamId];
+    if(streamOptions.loading === false){
+        streamOptions.loading = true;
+    }
+  });
 
 function saveSession(state){
     sessionStorage.setItem(sessionStorageKey, JSON.stringify(state));
@@ -50,11 +58,9 @@ const store = new Vuex.Store({
 
       },
       [UPDATE_STREAM](state, payload){
-          console.log(UPDATE_STREAM, payload);
           var options = payload.options;
-          var id = options.id;
-        //   Vue.set(state.streams, id, Object.assign({showChat: true}, state.streams[id], options));
-        state.streams[id] = Object.assign({showChat: true}, state.streams[id], options);
+          var id = payload.id;
+        state.streams[id] = Object.assign({}, state.streams[id], options);
         saveSession(state);
       },
       [SHOW_ARRAY_OPTIONS](state, payload){

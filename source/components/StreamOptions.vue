@@ -86,7 +86,11 @@ export default {
         data[field.name] = field.value || true;
       });
 
-      var options = Object.assign({}, this.options, data);
+      var options = Object.assign({
+        showChat: true
+      }, this.options, data, {
+        loading: this.options.channel != data.channel
+      });
 
       // transparency to opacity
       data.transparency = data.transparency || 0;
@@ -95,6 +99,7 @@ export default {
 
       this.$store.commit({
         type: UPDATE_STREAM,
+        id: this.options.id,
         options: options
       })
       this.$emit("close");

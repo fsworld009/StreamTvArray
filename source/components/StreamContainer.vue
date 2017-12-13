@@ -5,11 +5,15 @@
         <template v-for="(stream, col) in streamRow" >
 
           <div class="stream-col" v-if="stream.channel" :key="col" :style="style">
-            <component :is="'StreamTwitch'" :options="stream"  style="style"/>
+            <div class="stream-col overlay-text stream-overlay" :style="style" v-if="stream.loading">
+            <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
+              <h1 class="text white"><i class=" spinner loading icon"></i></h1>
+            </div>
+            <component :is="'StreamTwitch'" :options="stream"  style="style" @streamLoad="onStreamLoad"/>
             <StreamMenu @select="onSelectMenu" :stream="stream"/>
           </div>
           
-          <div class="stream-col open-stream-overlay" :key="col" v-else :style="style" @click="openStreamOptions(stream)">
+          <div class="stream-col overlay-text open-stream-overlay" :key="col" v-else :style="style" @click="openStreamOptions(stream)">
             <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
             <h1 class="text white">Open Stream</h1>
           </div>
@@ -84,8 +88,8 @@ export default {
         case "toggleChat":
           this.$store.commit({
             type: UPDATE_STREAM,
+            id: stream.id,
             options: {
-              id: stream.id,
               showChat: !stream.showChat
             }
           })
@@ -97,6 +101,16 @@ export default {
           this.$store.commit(SHOW_ARRAY_OPTIONS);
           break;
       }
+    },
+    onStreamLoad(stream){
+      console.log("onStreamLoad",stream);
+      this.$store.commit({
+        type: UPDATE_STREAM,
+        id: stream.id,
+        options: {
+          loading: false
+        }
+      })
     }
   }
 }

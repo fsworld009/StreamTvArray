@@ -15,19 +15,31 @@
       height:  100%;
   }
 
-  .stream-col.open-stream-overlay {
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.5s;
+  /* .stream-col.overlay-text {
+    
+
+  } */
+
+  .stream-col.stream-loading-overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
   }
 
-  .stream-col.stream-col.open-stream-overlay > h1 {
+  .stream-col.overlay-text > h1 {
     position: relative;
+    text-align: center;
     top: 50%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
   }
+
+  .stream-col.open-stream-overlay {
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
 
   .stream-col.open-stream-overlay:hover {
     cursor: pointer;

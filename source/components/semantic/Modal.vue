@@ -1,8 +1,8 @@
 <template>
   <div class="ui modal">
     <i class="close icon" v-if="!options.closable && options.closeIcon"></i>
-    <div class="header">
-      <h2 class="ui header blue">{{options.title}}
+    <div class="header" >
+      <h2 class="ui header blue" v-if="options.title">{{options.title}}
       </h2>
     </div>
     <div class=" content"><!-- scrolling-->
