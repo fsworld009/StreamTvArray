@@ -16,3 +16,6 @@ A utility web page to allow you to watch multiple streams (currently only suppor
 - Multi language support
 - Export / Import array and stream settings
 - Support more sites (not top priority)
+
+## Licence
+MIT
