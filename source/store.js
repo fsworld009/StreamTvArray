@@ -4,15 +4,25 @@ Vue.use(Vuex);
 var _ = require("lodash");
 import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS} from "./mutations.js";
 
+
+const sessionStorageKey = 'StreamTvArray';
+var session = sessionStorage.getItem(sessionStorageKey) || "{}";
+
+var initialState =  Object.assign({
+    // sessionId: 1,
+    width: 0,
+    height: 0,
+    streams: {},
+    showOptionFlag: false
+  //   savedSessions: []
+  }, JSON.parse(session));
+
+function saveSession(state){
+    sessionStorage.setItem(sessionStorageKey, JSON.stringify(state));
+}
+
 const store = new Vuex.Store({
-    state: {
-      sessionId: 1,
-      width: 0,
-      height: 0,
-      streams: {},
-      showOptionFlag: false
-    //   savedSessions: []
-    },
+    state: initialState,
     getters: {
         showOptions(state){
             return state.showOptionFlag || (state.width==0 && state.height==0);
@@ -36,6 +46,8 @@ const store = new Vuex.Store({
             }
         }
 
+        saveSession(state);
+
       },
       [UPDATE_STREAM](state, payload){
           console.log(UPDATE_STREAM, payload);
@@ -43,9 +55,11 @@ const store = new Vuex.Store({
           var id = options.id;
         //   Vue.set(state.streams, id, Object.assign({showChat: true}, state.streams[id], options));
         state.streams[id] = Object.assign({showChat: true}, state.streams[id], options);
+        saveSession(state);
       },
       [SHOW_ARRAY_OPTIONS](state, payload){
         state.showOptionFlag = true;
+        saveSession(state);
       }
     }
   });

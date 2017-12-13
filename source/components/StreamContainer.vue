@@ -56,7 +56,8 @@ export default {
       for(h=0;h<state.height;h++){
         var colStreams = []; 
         for(w=0;w<state.width;w++){
-          id = state.width==1? h: h*state.height + w;
+          id = h*state.width + w;
+          console.log("id",id,w,h)
           colStreams.push(state.streams[id]);
         }
         streams.push(colStreams);
