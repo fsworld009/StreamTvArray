@@ -9,6 +9,7 @@
         <SeCheckbox class="four wide" name="openChat" :checked="(typeof options.openChat === 'undefined'? true: options.openChat)" label="&nbsp;">Open Chat</SeCheckbox>
         <SeInput class="twelve wide" name="transparency" :value="transparency" label="Chat Transparency (0~100)"></SeInput>
       </div>
+      <div class="text violet"><i class="ui icon info circle large"></i> You can access options menu by clicking  <i class="large list layout icon blue" ></i> icon on top left hand side of the stream</div>
     </SeForm>
   </Modal>
 </template>
@@ -39,9 +40,10 @@ export default {
     return {
       modalOptions: {
         closeIcon: true,
+        title: this.options.channel? "Stream Options" : "Open Stream",
         actions: [
           {text: this.options.channel? "Apply" : "Open", styleClasses: "green", action: this.applyOption.bind(this)},
-          {text: "Close", styleClasses: "red cancel"}
+          {text: "Cancel", styleClasses: "red cancel"}
         ]
       },
       validationOptions: {

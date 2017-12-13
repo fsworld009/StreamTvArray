@@ -15,6 +15,8 @@
             </SeForm>
           </div>
           <div class="column">
+            <h5 class="ui dividing header">Change log</h5>
+            12.13.2017: First version
             <!-- <h5 class="ui dividing header">Load Sessions</h5>
             <div class="ui grid">
               <div class="thirteen wide column">
@@ -23,8 +25,18 @@
               <div class="one wide column"><SeButton class="green load-session">Load</SeButton></div>
             </div> -->
           </div>
+
         </div>
       </div>
+
+      <div class="ui divider"></div>
+      <div class="ui">
+        by <a href="https://github.com/fsworld009/" target="_blank">fsworld009</a>
+        <i class="ui large icon github"></i><a href="https://github.com/fsworld009/StreamTvArray" target="_blank">Project GitHub</a>
+        <i class="ui large icon warning circle"></i><a href="https://github.com/fsworld009/StreamTvArray/issues/" target="_blank">Report issues</a>
+      </div> 
+      
+
   </Modal>
 </template>
 
@@ -85,7 +97,7 @@ export default {
 
     modalOptions(state){
       return {
-        // title: "Options",
+        title: "Stream TV Array",
         // closable: false,
         closeIcon: state.width != 0 && state.height != 0
       };

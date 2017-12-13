@@ -1,5 +1,5 @@
 <template>
-  <form class="ui form">
+  <form class="ui form" action="javascript:void(0)">
     <slot></slot>
   </form>
 </template>
@@ -35,6 +35,10 @@ export default {
     destroy(){
       var $form = $(this.$el);
       $form.form('destroy');
+    },
+    submit(){
+      return false;
+      console.log("HERE")
     }
   }
 }
