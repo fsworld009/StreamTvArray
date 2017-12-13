@@ -13,3 +13,4 @@ new Vue({
     components: {Index}
 });
 
+window.onbeforeunload = function() { return "You are about to leave";};

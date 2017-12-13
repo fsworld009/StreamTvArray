@@ -4,7 +4,7 @@
       <i class="big list layout icon blue" ></i>
       <div class="ui menu inverted blue tablet or lower only">
         <template v-for="(menu, index) in menuItems">
-          <a  :key="index" :href="'javascript:void(0)'" :class="'item text white '+(menu.disabled?'disabled':'')" :target="menu.target||''" @click="emit(menu.action)"><i :class="'icon '+menu.icon"></i> {{menu.text}}</a>
+          <a  :key="index" :href="'javascript:void(0)'" :class="'item text '+(menu.color || 'white ')+(menu.disabled?'disabled ':' ')" :target="menu.target||''" @click="emit(menu.action)"><i :class="'icon '+menu.icon"></i> {{menu.text}}</a>
         </template>
       </div>
     </div>
@@ -23,7 +23,8 @@ export default {
       return [
         {icon: "comment", text: "Toggle Chat", action:"toggleChat", disabled: !this.options.openChat},
         {icon: "setting", text: "Stream Options", action:"streamOptions"},
-        {icon: "puzzle", text: "Array Options", action:"arrayOptions"}
+        {icon: "puzzle", text: "Array Options", action:"arrayOptions"},
+        {color: "yellow", icon: "remove", text: "Close Stream", action:"closeStream"}
       ];
     }
   },

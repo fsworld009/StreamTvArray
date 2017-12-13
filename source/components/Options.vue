@@ -1,5 +1,5 @@
 <template>
-  <Modal :options="modalOptions">
+  <Modal :options="modalOptions" @close="onCloseArrayOptionsModal">
     <SeForm>
       <div class="ui grid">
         <div class="two column row">
@@ -100,8 +100,18 @@ export default {
           width: data.width,
           height: data.height
         }
-      )
+      );
       $el.modal('hide');
+    },
+    onCloseArrayOptionsModal(){
+      //cancel array options
+      console.log("onCloseArrayOptionsModal");
+      //set showOptionsFlag
+      this.$store.commit(
+        {
+          type: RESET_ARRAY
+        }
+      );
     }
   }
 }

@@ -81,29 +81,38 @@ export default {
     onCloseOptionsModal(){
       this.streamOptions = null;
     },
-    onSelectMenu(stream, action){
+    onSelectMenu(streamOptions, action){
       switch(action){
         case "toggleChat":
           this.$store.commit({
             type: UPDATE_STREAM,
-            id: stream.id,
+            id: streamOptions.id,
             options: {
-              showChat: !stream.showChat
+              showChat: !streamOptions.showChat
             }
           })
           break;
         case "streamOptions":
-          this.streamOptions = stream;
+          this.streamOptions = streamOptions;
           break;
         case "arrayOptions":
           this.$store.commit(SHOW_ARRAY_OPTIONS);
           break;
+        case "closeStream":
+          this.$store.commit({
+            type: UPDATE_STREAM,
+            id: streamOptions.id,
+            options: {
+              channel: ""
+            }
+          });
+          break;
       }
     },
-    onStreamLoad(stream){
+    onStreamLoad(streamOptions){
       this.$store.commit({
         type: UPDATE_STREAM,
-        id: stream.id,
+        id: streamOptions.id,
         options: {
           loading: false
         }

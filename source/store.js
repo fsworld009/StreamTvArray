@@ -41,8 +41,10 @@ const store = new Vuex.Store({
     },
     mutations: {
       [RESET_ARRAY](state, payload){
-        state.width = Number(payload.width);
-        state.height = Number(payload.height);
+        if(payload.width && payload.height){
+            state.width = Number(payload.width);
+            state.height = Number(payload.height);
+        }
 
         state.showOptionFlag = false;
 
