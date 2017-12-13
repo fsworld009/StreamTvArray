@@ -1,7 +1,7 @@
 <template>
   <div class="stream-cell">
     <iframe class="stream" :src="'https://player.twitch.tv/?channel='+options.channel" frameborder="0" allowfullscreen="true" scrolling="no" @load="onStreamLoad"></iframe>
-        <div class="chat-container" :style="chatStyle">
+        <div class="chat-container" :style="chatStyle" v-if="options.openChat">
           <iframe :src="'https://www.twitch.tv/'+options.channel+'/chat?popout=true'" frameborder="0" scrolling="no"></iframe>
         </div>
         <!-- <div class="stream-overlay">

@@ -10,7 +10,7 @@
               <h1 class="text white"><i class=" spinner loading icon"></i></h1>
             </div>
             <component :is="'StreamTwitch'" :options="stream"  style="style" @streamLoad="onStreamLoad"/>
-            <StreamMenu @select="onSelectMenu" :stream="stream"/>
+            <StreamMenu @select="onSelectMenu" :options="stream"/>
           </div>
           
           <div class="stream-col overlay-text open-stream-overlay" :key="col" v-else :style="style" @click="openStreamOptions(stream)">
@@ -61,7 +61,6 @@ export default {
         var colStreams = []; 
         for(w=0;w<state.width;w++){
           id = h*state.width + w;
-          console.log("id",id,w,h)
           colStreams.push(state.streams[id]);
         }
         streams.push(colStreams);
@@ -83,7 +82,6 @@ export default {
       this.streamOptions = null;
     },
     onSelectMenu(stream, action){
-      console.log("select",stream, action, stream.id)
       switch(action){
         case "toggleChat":
           this.$store.commit({
@@ -103,7 +101,6 @@ export default {
       }
     },
     onStreamLoad(stream){
-      console.log("onStreamLoad",stream);
       this.$store.commit({
         type: UPDATE_STREAM,
         id: stream.id,

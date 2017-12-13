@@ -47,7 +47,6 @@ export default {
     this.showModal();
   },
   beforeDestroy(){
-    console.log("beforeDestroy");
     var $modal = $(this.$el);
     $modal.modal('hide');
     $modal.modal('destroy');
@@ -69,7 +68,6 @@ export default {
           this.$emit("close");
         }
       }, this.options);
-      console.log("options", options);
       $modal.modal(options);
     },
 
