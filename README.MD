@@ -12,7 +12,11 @@ A utility web page to allow you to watch multiple streams (currently only suppor
 - Confirm popup before unload the page to prevent from accidentely closing or leaving the page
 - Auto load opened streams on page refresh as long as the tab is not closed
 
+## Changelog
+- 12.13.2017: First version
+
 ## Todos
+- Test other browsers (mainly tested on Firefox as of now)
 - Multi language support
 - Export / Import array and stream settings
 - Support more sites (not top priority)

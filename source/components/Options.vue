@@ -7,9 +7,9 @@
             <SeForm :validation="validationOptions">
               <h5 class="ui dividing header">Array Size</h5>
               <div class="fields">
-              <SeInput class="two wide" name="width" :value="width" size="2" label=""/>  
+              <SeInput class="four wide" name="width" :value="width" size="2" label=""/>  
               <div class="one wide field"><div style="position:relative;top:35%">x</div></div>
-              <SeInput class="two wide" name="height" :value="height" size="2" label=""/>
+              <SeInput class="four wide" name="height" :value="height" size="2" label=""/>
               </div>
               <SeButton class="green" @click="changeArraySize">Apply</SeButton>
             </SeForm>
@@ -96,10 +96,11 @@ export default {
     },
 
     modalOptions(state){
+      var closeble = state.width != 0 && state.height != 0;
       return {
         title: "Stream TV Array",
-        // closable: false,
-        closeIcon: state.width != 0 && state.height != 0
+        closable: closeble,
+        closeIcon: closeble
       };
     }
   }),
