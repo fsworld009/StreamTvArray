@@ -2,7 +2,7 @@
 
 A utility web page to allow you to watch multiple streams (currently only support Twitch.tv) on one screen, with the ability to show and hide chat box at will.
 
-[Go to the page now](ttps://fsworld009.github.io/StreamTvArray/)
+[Go to the page now](https://fsworld009.github.io/StreamTvArray/)
 
 
 ## Features

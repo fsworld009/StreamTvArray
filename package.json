@@ -39,7 +39,7 @@
   "scripts": {
     "dev-server": "webpack-dev-server --config webpack.dev-server.config.js --inline --progress --colors --hot",
     "build": "webpack --config webpack.prod.config.js",
-    "deploy": "./deploy.sh -c deploy.env",
+    "deploy": "./utils/deploy.sh -c ./utils/deploy.env",
     "update:packages": "node ./utils/wipe-dependencies.js && rm -rf node_modules && npm update --save-dev && npm update --save",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
