@@ -1,15 +1,18 @@
 <template>
   <Modal :options="modalOptions" @close="onCloseArrayOptionsModal">
-    <SeForm>
+    
       <div class="ui grid">
         <div class="two column row">
           <div class="column">
-            <h5 class="ui dividing header">Array Size</h5>
-            
-              <SeInput name="width" :value="width" size="2"/>  
-              x       
-              <SeInput name="height" :value="height" size="2"/>
+            <SeForm :validation="validationOptions">
+              <h5 class="ui dividing header">Array Size</h5>
+              <div class="fields">
+              <SeInput class="two wide" name="width" :value="width" size="2" label=""/>  
+              <div class="one wide field"><div style="position:relative;top:35%">x</div></div>
+              <SeInput class="two wide" name="height" :value="height" size="2" label=""/>
+              </div>
               <SeButton class="green" @click="changeArraySize">Apply</SeButton>
+            </SeForm>
           </div>
           <div class="column">
             <!-- <h5 class="ui dividing header">Load Sessions</h5>
@@ -22,14 +25,13 @@
           </div>
         </div>
       </div>
-    </SeForm>
   </Modal>
 </template>
 
 <<style scoped>
-.ui.form input[type="text"][name="width"], .ui.form input[type="text"][name="height"]{
+/* .ui.form input[type="text"][name="width"], .ui.form input[type="text"][name="height"]{
   width: 50px;
-}
+} */
 </style>
 
 
@@ -53,12 +55,16 @@ export default {
     SeButton,
     Dropdown
   },
-  // data(){
-  //   var state = this.$store.state;
-  //   return {
-      
-  //   }
-  // },
+  data(){
+    return {
+      validationOptions: {
+        fields: {
+          width: 'regExp[/[1-9][0-9]*/]',
+          height: 'regExp[/[1-9][0-9]*/]'
+        }
+      }
+    }
+  },
   computed: mapState({
     // showSaveLoadSection(state){
     //   return state.savedSessions.length > 0;
@@ -91,21 +97,26 @@ export default {
       //validation?
       var $el = $(this.$el);
       var data = {};
-      $el.find('form').find('input, textarea, select').each(function(i, field) {
-        data[field.name] = field.value;
-      });
-      this.$store.commit(
-        {
-          type: RESET_ARRAY,
-          width: data.width,
-          height: data.height
-        }
-      );
-      $el.modal('hide');
+
+      var $form = $el.find('form');
+
+      if($form.form('is valid')){
+        $form.find('input, textarea, select').each(function(i, field) {
+          data[field.name] = field.value;
+        });
+
+        this.$store.commit(
+          {
+            type: RESET_ARRAY,
+            width: data.width,
+            height: data.height
+          }
+        );
+        $el.modal('hide');
+      }
     },
     onCloseArrayOptionsModal(){
       //cancel array options
-      console.log("onCloseArrayOptionsModal");
       //set showOptionsFlag
       this.$store.commit(
         {

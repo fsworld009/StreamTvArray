@@ -28,7 +28,6 @@ export default {
   },
   methods: {
     onStreamLoad(){
-      console.log("on iframe load");
       this.$emit("streamLoad", this.options);
     }
   }

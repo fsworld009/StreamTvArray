@@ -1,3 +1,5 @@
+window.onbeforeunload = function() { return "You are about to leave";};
+
 import Vue from 'vue';
 import Index from './Index.vue';
 import store from './store.js';
@@ -12,5 +14,3 @@ new Vue({
     template: '<Index/>',
     components: {Index}
 });
-
-window.onbeforeunload = function() { return "You are about to leave";};

@@ -18,7 +18,6 @@ var initialState =  Object.assign({
   }, JSON.parse(session));
 
   Object.keys(initialState.streams).forEach((streamId)=>{
-      console.log("streamId",streamId, initialState.streams);
     let streamOptions = initialState.streams[streamId];
     if(streamOptions.loading === false){
         streamOptions.loading = true;

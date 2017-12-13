@@ -1,7 +1,10 @@
 <template>
-  <div class="ui checkbox">
-    <input type="checkbox" :name="name" :value="value" v-model="compChecked">
-    <label><slot></slot></label>
+  <div class="field">
+    <label ><h5 v-if="label" v-html="label"></h5></label>
+    <div class="ui checkbox">
+      <input type="checkbox" :name="name" :value="value" v-model="compChecked">
+      <label><slot></slot></label>
+    </div>
   </div>
 </template>
 
@@ -20,6 +23,9 @@ export default {
     },
     checked: {
       default: false
+    },
+    label: {
+
     }
   },
   data(){
@@ -28,18 +34,18 @@ export default {
     }
   },
   mounted() {
-    this.create();
+    // this.create();
   },
   updated(){
-    this.destroy();
-    this.create();
+    // this.destroy();
+    // this.create();
   },
   beforeDestroy(){
-    this.destroy();
+    // this.destroy();
   }, 
   methods: {
     create(){
-      var $checkbox = $(this.$el);
+      var $checkbox = $(this.$el).find(".ui.checkbox");
 
       var options = Object.assign({
         
@@ -47,7 +53,7 @@ export default {
       $checkbox.checkbox(options);
     },
     destroy(){
-      var $checkbox = $(this.$el);
+      var $checkbox = $(this.$el).find(".ui.checkbox");
       $checkbox.checkbox('destroy');
     }
   },
