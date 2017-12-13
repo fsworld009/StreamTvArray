@@ -20,12 +20,6 @@
 
   } */
 
-  .stream-col.stream-loading-overlay {
-      position: absolute;
-      left: 0;
-      top: 0;
-  }
-
   .stream-col.overlay-text > h1 {
     position: relative;
     text-align: center;
