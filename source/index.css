@@ -15,21 +15,29 @@
       height:  100%;
   }
 
-  .stream-col.add-icon {
+  .stream-col.open-stream-overlay {
     text-align: center;
     opacity: 0;
     transition: opacity 0.5s;
   }
 
-  .stream-col.add-icon:hover {
+  .stream-col.stream-col.open-stream-overlay > h1 {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  .stream-col.open-stream-overlay:hover {
     cursor: pointer;
     opacity: 1;
     border: 0.5em solid white;
   }
 
-  .stream-col.add-icon > i {
+  /* .stream-col.add-icon > i {
       line-height: 1em;
-  }
+  } */
   
   body {
     overflow: hidden;

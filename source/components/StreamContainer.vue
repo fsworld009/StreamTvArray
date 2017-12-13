@@ -9,8 +9,9 @@
             <StreamMenu @select="onSelectMenu" :stream="stream"/>
           </div>
           
-          <div class="stream-col add-icon" :key="col" v-else :style="style" @click="openStreamOptions(stream)">
-            <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i>
+          <div class="stream-col open-stream-overlay" :key="col" v-else :style="style" @click="openStreamOptions(stream)">
+            <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
+            <h1 class="text white">Open Stream</h1>
           </div>
         </template>
       </div>
@@ -92,7 +93,7 @@ export default {
           this.streamOptions = stream;
           break;
         case "arrayOptions":
-        this.$store.commit(SHOW_ARRAY_OPTIONS);
+          this.$store.commit(SHOW_ARRAY_OPTIONS);
           break;
       }
     }
