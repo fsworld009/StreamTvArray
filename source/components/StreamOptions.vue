@@ -18,7 +18,7 @@
         </div> -->
         <div class="sixteen wide field">
           <Label><h5>Chat Transparency (0~100)</h5></Label>
-          <SeInput name="chatOpacity" :value="options.chatOpacity || 50"></SeInput>
+          <SeInput name="transparency" :value="transparency"></SeInput>
         </div>
       </div>
     </SeForm>
@@ -63,6 +63,9 @@ export default {
   },
 
   computed: {
+    transparency(){
+      return this.options.chatOpacity ? 100 - this.options.chatOpacity : 50;
+    }
   },
 
   methods: {
@@ -85,6 +88,10 @@ export default {
 
       var options = Object.assign({}, this.options, data);
 
+      // transparency to opacity
+      data.transparency = data.transparency || 0;
+      options.chatOpacity = 100 - data.transparency;
+      delete data.transparency;
 
       this.$store.commit({
         type: UPDATE_STREAM,
