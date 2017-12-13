@@ -2,7 +2,7 @@ import Vuex from 'vuex';
 import Vue from 'vue';
 Vue.use(Vuex);
 var _ = require("lodash");
-import {RESET_ARRAY, UPDATE_STREAM} from "./mutations.js";
+import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS} from "./mutations.js";
 
 const store = new Vuex.Store({
     state: {
@@ -26,6 +26,8 @@ const store = new Vuex.Store({
         state.width = Number(payload.width);
         state.height = Number(payload.height);
 
+        state.showOptionFlag = false;
+
         for(let i=0; i< state.width*state.height; i++){
             if(!state.streams[i]){
                 Vue.set(state.streams, i, {
@@ -41,6 +43,9 @@ const store = new Vuex.Store({
           var id = options.id;
         //   Vue.set(state.streams, id, Object.assign({showChat: true}, state.streams[id], options));
         state.streams[id] = Object.assign({showChat: true}, state.streams[id], options);
+      },
+      [SHOW_ARRAY_OPTIONS](state, payload){
+        state.showOptionFlag = true;
       }
     }
   });

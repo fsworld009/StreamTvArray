@@ -79,8 +79,8 @@ export default {
 
     modalOptions(state){
       return {
-        title: "Options",
-        closable: false,
+        // title: "Options",
+        // closable: false,
         closeIcon: state.width != 0 && state.height != 0
       };
     }

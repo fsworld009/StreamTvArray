@@ -27,7 +27,7 @@ import {mapState} from 'vuex';
 import StreamTwitch from './StreamTwitch.vue';
 import StreamOptions from './StreamOptions.vue';
 import StreamMenu from './StreamMenu.vue';
-import {UPDATE_STREAM} from '../mutations.js';
+import {UPDATE_STREAM, SHOW_ARRAY_OPTIONS} from '../mutations.js';
 
 export default {
   components: {
@@ -87,7 +87,13 @@ export default {
               showChat: !stream.showChat
             }
           })
-        break;
+          break;
+        case "streamOptions":
+          this.streamOptions = stream;
+          break;
+        case "arrayOptions":
+        this.$store.commit(SHOW_ARRAY_OPTIONS);
+          break;
       }
     }
   }

@@ -1,2 +1,3 @@
 export const RESET_ARRAY = 'RESET_ARRAY';
 export const UPDATE_STREAM = 'UPDATE_STREAM';
+export const SHOW_ARRAY_OPTIONS = 'SHOW_ARRAY_OPTIONS';
