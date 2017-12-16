@@ -31,6 +31,7 @@
 
       <div class="ui divider"></div>
       <div class="ui">
+        {{ $lang("hello.world", {name: "Me"})}}
         by <a href="https://github.com/fsworld009/" target="_blank">fsworld009</a>
         <i class="ui large icon github"></i><a href="https://github.com/fsworld009/StreamTvArray" target="_blank">Project GitHub</a>
         <i class="ui large icon warning circle"></i><a href="https://github.com/fsworld009/StreamTvArray/issues/" target="_blank">Report issues</a>
