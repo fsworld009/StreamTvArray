@@ -1,17 +1,20 @@
 <template>
   <Modal :options="modalOptions" @close="onCloseArrayOptionsModal">
-    
+     
       <div class="ui grid">
         <div class="two column row">
           <div class="column">
             <SeForm :validation="validationOptions">
               <h5 class="ui dividing header">Array Size</h5>
               <div class="fields">
-              <SeInput class="four wide" name="width" :value="width" size="2" label=""/>  
+                <SeInput class="four wide" name="width" :value="width" size="2" label=""/>  
               <div class="one wide field"><div style="position:relative;top:35%">x</div></div>
-              <SeInput class="four wide" name="height" :value="height" size="2" label=""/>
+                <SeInput class="four wide" name="height" :value="height" size="2" label=""/>
+                 <div class="four wide field"><div style="position:relative;top:15%"><SeButton class="green" @click="changeArraySize">Apply</SeButton></div></div>
               </div>
-              <SeButton class="green" @click="changeArraySize">Apply</SeButton>
+             
+              
+              <Dropdown class="" name="site" :items="languages" :value="$lang.langCode()" label="Language"></Dropdown>
             </SeForm>
           </div>
           <div class="column">
@@ -31,7 +34,7 @@
 
       <div class="ui divider"></div>
       <div class="ui">
-        {{ $lang("hello.world", {name: "Me"})}}
+        {{ $lang("hello.world", {name: "Me"})}} {{}}
         by <a href="https://github.com/fsworld009/" target="_blank">fsworld009</a>
         <i class="ui large icon github"></i><a href="https://github.com/fsworld009/StreamTvArray" target="_blank">Project GitHub</a>
         <i class="ui large icon warning circle"></i><a href="https://github.com/fsworld009/StreamTvArray/issues/" target="_blank">Report issues</a>
@@ -103,6 +106,13 @@ export default {
         closable: closeble,
         closeIcon: closeble
       };
+    },
+
+    languages(state){
+      return [
+        {"value": "en", "text":"English"},
+        {"value": "zh-TW", "text":"繁體中文"}
+      ]
     }
   }),
 

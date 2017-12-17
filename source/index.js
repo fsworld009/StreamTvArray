@@ -10,8 +10,10 @@ require('./semantic/semantic.js');
 require('./index.css');
 
 Vue.use(VueLang, {
+    // langCode: "zh-TW",
     messages: {
-        "en": {"hello": {"world":"Hello World {name}"}}
+        "en": {"hello": "Hello World {name}"},
+        "zh-TW": {"hello": "你好世界 {name}"}
     }
 });
 

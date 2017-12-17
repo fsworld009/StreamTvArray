@@ -38,7 +38,7 @@ export default {
             returnMsg = String(returnMsg);
 
             if(substitutions){
-                returnMsg = returnMsg.replace(/\{([A-Za-z]+)\}/g, function(match, $1){
+                returnMsg = returnMsg.replace(/\{([A-Za-z0-9]+)\}/g, function(match, $1){
                     if(substitutions[$1]){
                         return substitutions[$1];
                     }else{
@@ -50,13 +50,21 @@ export default {
             return returnMsg;
         };
 
+        Vue.prototype.$lang.lang="!!!!!";
+
         Vue.prototype.$lang.changeLangCode = function(currLnagCode){
             langCode = currLangCode;
+        };
+
+        Vue.prototype.$lang.langCode = function(){
+            return langCode;
         };
 
         Vue.prototype.$lang.update = function(langCode, messages){
             messageMap[langCode] = messages;
         };
+
+        console.log("$lang",Vue.prototype.$lang)
 
     }
 };

@@ -34,14 +34,7 @@ var config = {
                 loader: 'babel-loader',
                 exclude: /(semantic.js)|(node_modules)/,
                 query: {
-                //   presets: ['babel-preset-env']
-                    presets: [
-                        ["env", {
-                            "targets": {
-                                "browsers": ["ie >= 9"]
-                            }
-                        }]
-                    ]
+                    presets: ["env"]
                 }
             },
             {
@@ -68,7 +61,8 @@ var config = {
             { test: /\.(png|jpg|gif)$/, loader: 'url-loader?limit=8192' }, // inline base64 URLs for <=8k images, direct URLs for the rest
             { test: /\.woff(2)?(\?v=[0-9\.]+)?$/,   loader: "url-loader?prefix=font/&limit=5000" },
             { test: /\.(eot|ttf|svg)(\?v=[0-9\.]+)?$/,    loader: "url-loader?prefix=font/&limit=5000" },
-            // { test: require.resolve("jquery"), loader: "expose?$!expose?jQuery" },
+            { test: require.resolve("jquery"), loader: "expose-loader?$!expose-loader?jQuery" },
+            { test: require.resolve("vue/dist/vue.esm.js"), loader: "expose-loader?Vue" },  //exposed at Vue.default
             // { test: require.resolve("lodash"), loader: "expose?_" },
         ]
     },

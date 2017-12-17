@@ -13,6 +13,7 @@
     "eslint": "4.13.0",
     "eslint-plugin-html": "4.0.1",
     "eslint-plugin-vue": "3.14.0",
+    "expose-loader": "0.7.4",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
     "html-webpack-harddisk-plugin": "0.1.0",
