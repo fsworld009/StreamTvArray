@@ -1,8 +1,10 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
+import VueLang from "./plugins/vue-lang.js";
+
 Vue.use(Vuex);
 // var _ = require("lodash");
-import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS} from "./mutations.js";
+import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS, CHANGE_LANG_CODE} from "./mutations.js";
 
 
 const sessionStorageKey = 'StreamTvArray';
@@ -13,7 +15,8 @@ var initialState =  Object.assign({
     width: 0,
     height: 0,
     streams: {},
-    showOptionFlag: false
+    showOptionFlag: false,
+    langCode: "en"
   //   savedSessions: []
   }, JSON.parse(session));
 
@@ -23,6 +26,17 @@ var initialState =  Object.assign({
         streamOptions.loading = true;
     }
   });
+
+Vue.use(VueLang, {
+    langCode: initialState.langCode,
+    messages: {
+        "en": {"hello": "Hello World {name}"},
+        "zh-TW": {"hello": "你好世界 {name}"}
+    }
+});
+
+
+
 
 function saveSession(state){
     sessionStorage.setItem(sessionStorageKey, JSON.stringify(state));
@@ -66,6 +80,12 @@ const store = new Vuex.Store({
       },
       [SHOW_ARRAY_OPTIONS](state, payload){
         state.showOptionFlag = true;
+        saveSession(state);
+      },
+
+      [CHANGE_LANG_CODE](state, payload){
+        state.langCode = payload.langCode;
+        Vue.$lang.changeLangCode(payload.langCode);
         saveSession(state);
       }
     }

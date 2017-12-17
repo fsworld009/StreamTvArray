@@ -54,7 +54,9 @@ export default {
       var $dropdown = $(this.$el).find(".ui.dropdown");
 
       var options = Object.assign({
-        
+        onChange: (value, text, $choice)=>{
+          this.$emit("change", value, text, $choice);
+        }
       }, this.options);
       $dropdown.dropdown(options);
     },

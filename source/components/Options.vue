@@ -12,10 +12,8 @@
                 <SeInput class="four wide" name="height" :value="height" size="2" label=""/>
                  <div class="four wide field"><div style="position:relative;top:15%"><SeButton class="green" @click="changeArraySize">Apply</SeButton></div></div>
               </div>
-             
-              
-              <Dropdown class="" name="site" :items="languages" :value="$lang.langCode()" label="Language"></Dropdown>
             </SeForm>
+            <Dropdown class="" name="langCode" :items="languages" :value="$lang.langCode()" label="Language" @change="onLangCodeChange"></Dropdown>
           </div>
           <div class="column">
             <h5 class="ui dividing header">Change log</h5>
@@ -34,7 +32,7 @@
 
       <div class="ui divider"></div>
       <div class="ui">
-        {{ $lang("hello.world", {name: "Me"})}} {{}}
+        {{ $lang("hello", {name: "Me"})}}
         by <a href="https://github.com/fsworld009/" target="_blank">fsworld009</a>
         <i class="ui large icon github"></i><a href="https://github.com/fsworld009/StreamTvArray" target="_blank">Project GitHub</a>
         <i class="ui large icon warning circle"></i><a href="https://github.com/fsworld009/StreamTvArray/issues/" target="_blank">Report issues</a>
@@ -60,7 +58,7 @@ import SeButton from './semantic/Button.vue';
 import SeInput from './semantic/Input.vue';
 import Dropdown from './semantic/Dropdown.vue';
 var _ = require("lodash");
-import {RESET_ARRAY} from '../mutations.js';
+import {RESET_ARRAY, CHANGE_LANG_CODE} from '../mutations.js';
 
 export default {
   components: {
@@ -147,6 +145,14 @@ export default {
           type: RESET_ARRAY
         }
       );
+    },
+
+    onLangCodeChange(value, text, $choice){
+      console.log("onLangCodeChange",value, text, $choice);
+      this.$store.commit({
+        type: CHANGE_LANG_CODE,
+        langCode: value
+      })
     }
   }
 }

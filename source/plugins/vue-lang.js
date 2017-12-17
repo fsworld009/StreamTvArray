@@ -2,7 +2,7 @@
 var messageMap = {};
 var langCode = "en";
 
-export default {
+var VueLang = {
     install: function(Vue, options){
         options = options || {};
         if(options.messages){
@@ -60,11 +60,17 @@ export default {
             return langCode;
         };
 
-        Vue.prototype.$lang.update = function(langCode, messages){
-            messageMap[langCode] = messages;
-        };
+        Vue.$lang = {
+            changeLangCode: function(newLangCode){
+                langCode = newLangCode;
+            },
 
-        console.log("$lang",Vue.prototype.$lang)
+            update: function(langCode, messages){
+                messageMap[langCode] = messages;
+            }
+        };
 
     }
 };
+
+export default VueLang;
