@@ -4,7 +4,8 @@ import VueLang from "./plugins/vue-lang.js";
 
 Vue.use(Vuex);
 // var _ = require("lodash");
-import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS, CHANGE_LANG_CODE} from "./mutations.js";
+import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS, UPDATE_LANG, CHANGE_LANG_CODE} from "./mutations.js";
+import {LOAD_LANG} from "./actions.js";
 
 
 const sessionStorageKey = 'StreamTvArray';
@@ -20,19 +21,19 @@ var initialState =  Object.assign({
   //   savedSessions: []
   }, JSON.parse(session));
 
-  Object.keys(initialState.streams).forEach((streamId)=>{
+
+Object.keys(initialState.streams).forEach((streamId)=>{
     let streamOptions = initialState.streams[streamId];
     if(streamOptions.loading === false){
         streamOptions.loading = true;
-    }
-  });
+}
+});
+
+var defaultLangCode = "en";
 
 Vue.use(VueLang, {
     langCode: initialState.langCode,
-    messages: {
-        "en": {"hello": "Hello World {name}"},
-        "zh-TW": {"hello": "你好世界 {name}"}
-    }
+    default: defaultLangCode
 });
 
 
@@ -40,6 +41,17 @@ Vue.use(VueLang, {
 
 function saveSession(state){
     sessionStorage.setItem(sessionStorageKey, JSON.stringify(state));
+}
+
+function loadLang(langCode, commit){
+    return $.getJSON("./languages/"+langCode+".json", function(messages){
+        console.log("loaded", langCode, messages);
+        commit({
+            type: UPDATE_LANG,
+            langCode: langCode,
+            messages: messages
+        });
+    });
 }
 
 const store = new Vuex.Store({
@@ -51,6 +63,31 @@ const store = new Vuex.Store({
     //   savedSessionsById(state){
     //     return _.keyBy(state.savedSessions, "id");
     //   }
+    },
+    actions:{
+        [LOAD_LANG]({ commit, state }, payload){
+            console.log(commit, state, payload);
+            var $defaultLangPromise;
+            
+            if(!Vue.$lang.loaded(defaultLangCode)){
+                $defaultLangPromise = loadLang(defaultLangCode, commit);
+            }else{
+                $defaultLangPromise = $.Deferred().resolve();
+            }
+            $defaultLangPromise.then(()=>{
+                var langCode = payload.langCode || state.langCode;
+                if(langCode && !Vue.$lang.loaded(langCode)){
+                    return loadLang(langCode, commit);
+                }else{
+                    return $.Deferred().resolve();
+                }
+            }).then(()=>{
+                console.log("resolved");
+                if(typeof payload.callback == "function"){
+                    payload.callback();
+                }
+            });
+        }
     },
     mutations: {
       [RESET_ARRAY](state, payload){
@@ -87,6 +124,10 @@ const store = new Vuex.Store({
         state.langCode = payload.langCode;
         Vue.$lang.changeLangCode(payload.langCode);
         saveSession(state);
+      },
+
+      [UPDATE_LANG](state, payload){
+        Vue.$lang.update(payload.langCode, payload.messages);
       }
     }
   });

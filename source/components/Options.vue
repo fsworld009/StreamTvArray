@@ -32,7 +32,6 @@
 
       <div class="ui divider"></div>
       <div class="ui">
-        {{ $lang("hello", {name: width})}}
         by <a href="https://github.com/fsworld009/" target="_blank">fsworld009</a>
         <i class="ui large icon github"></i><a href="https://github.com/fsworld009/StreamTvArray" target="_blank">Project GitHub</a>
         <i class="ui large icon warning circle"></i><a href="https://github.com/fsworld009/StreamTvArray/issues/" target="_blank">Report issues</a>
@@ -59,6 +58,7 @@ import SeInput from './semantic/Input.vue';
 import Dropdown from './semantic/Dropdown.vue';
 var _ = require("lodash");
 import {RESET_ARRAY, CHANGE_LANG_CODE} from '../mutations.js';
+import {LOAD_LANG} from '../actions.js';
 
 export default {
   components: {
@@ -148,10 +148,17 @@ export default {
     },
 
     onLangCodeChange(value, text, $choice){
-      this.$store.commit({
-        type: CHANGE_LANG_CODE,
-        langCode: value
-      })
+      this.$store.dispatch({
+        type: LOAD_LANG,
+        langCode: value,
+        callback: ()=>{
+          this.$store.commit({
+            type: CHANGE_LANG_CODE,
+            langCode: value
+          });
+        }
+      });
+      
     }
   }
 }

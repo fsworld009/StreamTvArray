@@ -1,0 +1,32 @@
+{
+    "common":{
+        "apply": "Apply",
+        "cancel": "Cancel",
+        "open": "Open",
+        "language": "Language"
+    },
+    "arrayOptions":{
+        "arraySize": "Array Size"
+    },
+    "streamOptions":{
+        "site":"Site",
+        "channelId": "Channel ID",
+        "openChat": "Open Chat",
+        "chatTransparency": "Chat Transparency",
+        "menuInfo": "You can access options menu by clicking {icon} icon on top left hand side of the stream"
+    },
+    "stream": {
+        "openStream": "Open Stream",
+        "toggleChat": "Toggle Chat",
+        "moveChat": "Move Chat",
+        "streamOptions": "Stream Options",
+        "arrayOptions": "Array Options",
+        "moveStream": "Move Stream",
+        "closeStream": "Close Stream"
+    },
+    "info":{
+        "changeLog": "Change Log",
+        "projectGitHub": "Project GitHub",
+        "reportIssues": "Report Issues"
+    }
+}

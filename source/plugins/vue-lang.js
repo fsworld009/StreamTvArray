@@ -5,6 +5,7 @@
 var VueLang = {
     __messageMap: {},
     __langCode: "en",
+    __defaultLangCode: "en",
 
     __$lang: function(){
         var $lang = function(messageId, substitutions){
@@ -50,6 +51,22 @@ var VueLang = {
         return $lang;
     },
 
+    processMessages: function(returnMsgObj, currentMsgObj, prefixes){
+        var keys = Object.keys(currentMsgObj);
+        var msgPrefix = prefixes.join(".");
+        for(var i=0;i<keys.length;i++){
+            var key = keys[i];
+            var message = currentMsgObj[key];
+            if(typeof message == "object"){
+                prefixes.push(key);
+                VueLang.processMessages(returnMsgObj, message, prefixes);
+                prefixes.pop();
+            }else{
+                returnMsgObj[msgPrefix + "." + key] = message;
+            }
+        }
+    },
+
     install: function(Vue, options){
         options = options || {};
         if(options.messages){
@@ -60,8 +77,12 @@ var VueLang = {
             VueLang.__langCode = options.langCode;
         }
 
+        if(options.default){
+            VueLang.__defaultLangCode = options.default;
+        }
 
         Vue.prototype.$lang = VueLang.__$lang();
+
 
         Vue.$lang = {
             changeLangCode: function(newLangCode){
@@ -70,7 +91,13 @@ var VueLang = {
             },
 
             update: function(langCode, messages){
-                VueLang.__messageMap[langCode] = messages;
+                var returnMsg = {};
+                VueLang.processMessages(returnMsg, messages, []);
+                VueLang.__messageMap[langCode] = Object.assign({}, VueLang.__messageMap[VueLang.__defaultLangCode], returnMsg);
+            },
+
+            loaded: function(langCode){
+                return VueLang.__messageMap[langCode]? true: false;
             }
         };
 
@@ -90,4 +117,5 @@ var VueLang = {
     }
 };
 
+console.log("VueLang",VueLang);
 export default VueLang;
