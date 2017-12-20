@@ -1,22 +1,15 @@
 
-var messageMap = {};
-var langCode = "en";
+// var messageMap = {};
+// var langCode = "en";
 
 var VueLang = {
-    install: function(Vue, options){
-        options = options || {};
-        if(options.messages){
-            messageMap = Object.assign({}, options.messages);
-        }
+    __messageMap: {},
+    __langCode: "en",
 
-        if(options.langCode){
-            langCode = options.langCode;
-        }
-
-
-        Vue.prototype.$lang = function(messageId, substitutions){
+    __$lang: function(){
+        var $lang = function(messageId, substitutions){
             messageId = String(messageId);
-            var messages = messageMap[langCode];
+            var messages = VueLang.__messageMap[VueLang.__langCode];
             if(!messages){
                 return "";
             }
@@ -50,26 +43,50 @@ var VueLang = {
             return returnMsg;
         };
 
-        Vue.prototype.$lang.lang="!!!!!";
-
-        Vue.prototype.$lang.changeLangCode = function(currLnagCode){
-            langCode = currLangCode;
+        $lang.langCode = function(){
+            return VueLang.__langCode;
         };
 
-        Vue.prototype.$lang.langCode = function(){
-            return langCode;
-        };
+        return $lang;
+    },
+
+    install: function(Vue, options){
+        options = options || {};
+        if(options.messages){
+            VueLang.__messageMap = Object.assign({}, options.messages);
+        }
+
+        if(options.langCode){
+            VueLang.__langCode = options.langCode;
+        }
+
+
+        Vue.prototype.$lang = VueLang.__$lang();
 
         Vue.$lang = {
             changeLangCode: function(newLangCode){
-                langCode = newLangCode;
+                VueLang.__langCode = newLangCode;
+                VueLang.__$forceUpdate(VueLang.__$root);
             },
 
             update: function(langCode, messages){
-                messageMap[langCode] = messages;
+                VueLang.__messageMap[langCode] = messages;
             }
         };
 
+    },
+
+    __$forceUpdate: function(vm){
+        vm.$forceUpdate();
+        for(var i=0; i< vm.$children.length; i++){
+            this.__$forceUpdate(vm.$children[i]);
+        }
+    },
+
+    __$root: undefined,
+
+    setAppRoot: function($root){
+        this.__$root = $root;
     }
 };
 

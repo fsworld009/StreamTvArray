@@ -26,7 +26,6 @@ export default {
       var $form = $(this.$el);
 
       if(this.validation){
-        console.log("init validation")
         $form.form(Object.assign({
           on: 'blur'
         }, this.validation));
@@ -38,7 +37,6 @@ export default {
     },
     submit(){
       return false;
-      console.log("HERE")
     }
   }
 }

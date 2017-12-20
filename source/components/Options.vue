@@ -32,7 +32,7 @@
 
       <div class="ui divider"></div>
       <div class="ui">
-        {{ $lang("hello", {name: "Me"})}}
+        {{ $lang("hello", {name: width})}}
         by <a href="https://github.com/fsworld009/" target="_blank">fsworld009</a>
         <i class="ui large icon github"></i><a href="https://github.com/fsworld009/StreamTvArray" target="_blank">Project GitHub</a>
         <i class="ui large icon warning circle"></i><a href="https://github.com/fsworld009/StreamTvArray/issues/" target="_blank">Report issues</a>
@@ -148,7 +148,6 @@ export default {
     },
 
     onLangCodeChange(value, text, $choice){
-      console.log("onLangCodeChange",value, text, $choice);
       this.$store.commit({
         type: CHANGE_LANG_CODE,
         langCode: value
