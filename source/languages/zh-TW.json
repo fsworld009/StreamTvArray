@@ -13,7 +13,7 @@
         "channelId": "頻道ID",
         "openChat": "開啟聊天室",
         "chatTransparency": "聊天室透明度",
-        "menuInfo": "點擊在串流左上角的 {icon} 圖示可開啟設定選單"
+        "menuInfo": "點擊串流左上角的 {icon} 圖示可開啟設定選單"
     },
     "stream": {
         "openStream": "開啟串流",

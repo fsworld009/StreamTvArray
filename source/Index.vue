@@ -1,7 +1,10 @@
 <template>
   <div>
     <template v-if="loading">
-
+      <div class="stream-col overlay-text stream-overlay">
+      <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
+        <h1 class="text white"><i class=" spinner loading icon"></i></h1>
+      </div>
     </template>
     <template v-else>
       <StreamContainer/>

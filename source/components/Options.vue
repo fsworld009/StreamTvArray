@@ -95,7 +95,7 @@ export default {
       var closeble = state.width != 0 && state.height != 0;
       return {
         title: "Stream TV Array",
-        closeIcon: closeble,
+        closable: closeble,
         closeIcon: closeble
       };
     },
