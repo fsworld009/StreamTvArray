@@ -43,6 +43,11 @@ export default {
   beforeDestroy(){
     // this.destroy();
   }, 
+  watch: {
+    compChecked(checked){
+      this.$emit("change", checked);
+    }
+  },
   methods: {
     create(){
       var $checkbox = $(this.$el).find(".ui.checkbox");

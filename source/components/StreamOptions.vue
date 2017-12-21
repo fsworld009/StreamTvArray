@@ -6,10 +6,10 @@
         <SeInput class="twelve wide" name="channel" :value="compOptions.channel" :label="$lang('streamOptions.channelId')"></SeInput>
       </div>
       <div class="fields">
-        <SeCheckbox class="sixteen wide" name="openChat" :checked="compOptions.openChat" label="">{{$lang('streamOptions.openChat')}}</SeCheckbox>
+        <SeCheckbox class="sixteen wide" name="openChat" :checked="compOptions.openChat" label="" @change="onToggleOpenChat">{{$lang('streamOptions.openChat')}}</SeCheckbox>
         
       </div>
-      <div v-if="true">
+      <div v-if="showChatDetailOptions">
         <div class="fields">
           <SeInput class="four wide" name="chatWidth" :value="compOptions.chatWidth" placeholder="0~50" :label="$lang('streamOptions.chatWidth')" suffix="%"></SeInput>
           <SeInput class="four wide" name="transparency" :value="compOptions.transparency" placeholder="0~100" :label="$lang('streamOptions.chatTransparency')" suffix="%"></SeInput>
@@ -64,7 +64,8 @@ export default {
       },
       sites: [
         {text: "Twitch", value: "twitch"}
-      ]
+      ],
+      showChatDetailOptions: false
     }
   },
 
@@ -80,9 +81,12 @@ export default {
 
       options.transparency = this.options.chatOpacity ? 100 - this.options.chatOpacity : 50;
 
+      this.showChatDetailOptions = options.openChat;
+
       return options;
 
     },
+    
     chatPositionOptions(){
       return [
         {text: this.$lang('common.left'), value: "left"},
@@ -95,14 +99,19 @@ export default {
     onCloseModal(){
       this.$emit("close");
     },
+    onToggleOpenChat(checked){
+      this.showChatDetailOptions = checked;
+    },
     applyOption(){
       var $el = $(this.$el);
       var data = {};
 
       var $form =  $el.find('form');
       $form.form("validate form");  //force UI update
+
+
       if($form.form("is valid")){
-        $el.find('form').find('input, textarea').each(function(i, input) {
+        $el.find('form').find('input:visible, textarea:visible').each(function(i, input) {
           var $input = $(input);
           var inputType = $(this).attr("type");
           var name = $input.attr("name");
@@ -112,27 +121,30 @@ export default {
               data[name] = value;
             }
           }else if(inputType == "checkbox"){
-              data[name] = $input.prop("checked");
+              data[name] = $input.prop("checked")? (value||true) : false;
           }
         });
-        $el.find('form').find('input:checked').each(function(i, field) {
-          data[field.name] = field.value || true;
-        });
+        // $el.find('form').find('input:checked').each(function(i, field) {
+        //   data[field.name] = field.value || true;
+        // });
 
         var options = Object.assign({
           showChat: true
         }, this.options, data);
 
         // transparency to opacity
-        data.transparency = data.transparency || 0;
-        options.chatOpacity = 100 - data.transparency;
-        delete data.transparency;
+        if(typeof data.transparency != "undefined"){
+          data.transparency = data.transparency || 0;
+          options.chatOpacity = 100 - data.transparency;
+        }else{
+          delete options.chatOpacity;
+        }
+        delete options.transparency;
 
         //set showChat flag to true to reduce confusion when re-enable openChat flag
         if(options.showChat === false){
           options.showChat = true;
         }
-
         this.$store.commit({
           type: UPDATE_STREAM,
           id: this.options.id,
