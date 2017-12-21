@@ -4,7 +4,7 @@ import VueLang from "./plugins/vue-lang.js";
 
 Vue.use(Vuex);
 // var _ = require("lodash");
-import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS, UPDATE_LANG, CHANGE_LANG_CODE} from "./mutations.js";
+import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS, UPDATE_LANG, CHANGE_LANG_CODE, SWAP_STREAM_ORDER} from "./mutations.js";
 import {LOAD_LANG} from "./actions.js";
 
 
@@ -98,7 +98,8 @@ const store = new Vuex.Store({
         for(let i=0; i< state.width*state.height; i++){
             if(!state.streams[i]){
                 Vue.set(state.streams, i, {
-                    id: i
+                    id: i,
+                    order: i
                 });
             }
         }
@@ -125,6 +126,15 @@ const store = new Vuex.Store({
 
       [UPDATE_LANG](state, payload){
         Vue.$lang.update(payload.langCode, payload.messages);
+      },
+      [SWAP_STREAM_ORDER](state,payload){
+          var IdList = payload.ids;
+          var stream1 = state.streams[IdList[0]], stream2 = state.streams[IdList[1]];
+          var temp;
+          temp = stream1.order;
+          stream1.order = stream2.order;
+          stream2.order = temp;
+          saveSession(state);
       }
     }
   });

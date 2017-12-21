@@ -2,20 +2,27 @@
   <div class="stream-container">
     <template v-for="(streamRow, row) in streams">
       <div class="stream-row" :key="row">
-        <template v-for="(stream, col) in streamRow" >
-
-          <div class="stream-col" v-if="stream.channel" :key="col" :style="style">
-            <div class="stream-col overlay-text stream-overlay" :style="style" v-if="stream.loading">
-            <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
-              <h1 class="text white"><i class=" spinner loading icon"></i></h1>
+        <template v-for="stream in streamRow">
+          <div :class="'stream-col '" :key="stream.id" :style="streamColStyle">
+            <div v-if="stream.channel">
+              <div class="stream-col overlay-text stream-overlay" :style="streamColStyle" v-if="stream.loading">
+              <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
+                <h1 class="text white"><i class=" spinner loading icon"></i></h1>
+              </div>
+              <component :is="'StreamTwitch'" :options="stream"  :style="streamColStyle" @streamLoad="onStreamLoad"/>
+              <StreamMenu @select="onSelectMenu" :options="stream"/>
             </div>
-            <component :is="'StreamTwitch'" :options="stream"  style="style" @streamLoad="onStreamLoad"/>
-            <StreamMenu @select="onSelectMenu" :options="stream"/>
-          </div>
-          
-          <div class="stream-col overlay-text open-stream-overlay" :key="col" v-else :style="style" @click="openStreamOptions(stream)">
-            <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
-            <h1 class="text white">{{$lang("stream.openStream")}}</h1>
+            
+            <div class="stream-col overlay-text open-stream-overlay" v-else-if="!movingStream" :style="streamColStyle" @click="openStreamOptions(stream)">
+              <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
+              <h1 class="text white">{{$lang("stream.openStream")}}</h1>
+            </div>
+
+            <div class="stream-col overlay-text stream-overlay move-candidate" :style="streamColStyle" v-if="movingStream" @click="moveStream(stream)">
+              <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
+              <h1 class="text white">Move To Here</h1>
+            </div>
+
           </div>
         </template>
       </div>
@@ -32,7 +39,7 @@ import {mapState} from 'vuex';
 import StreamTwitch from './StreamTwitch.vue';
 import StreamOptions from './StreamOptions.vue';
 import StreamMenu from './StreamMenu.vue';
-import {UPDATE_STREAM, SHOW_ARRAY_OPTIONS} from '../mutations.js';
+import {UPDATE_STREAM, SHOW_ARRAY_OPTIONS, SWAP_STREAM_ORDER} from '../mutations.js';
 
 export default {
   components: {
@@ -42,8 +49,8 @@ export default {
   },
   data(){
     return {
-      streamOptions: null
-      
+      streamOptions: null,
+      movingStream: null
     }
   },
   computed: mapState({
@@ -55,19 +62,30 @@ export default {
     },
     streams(state){
       //restructure streams object into nested presentation
-      var w,h,id=0;
-      var streams=[];
+      var w,h,order=0;
+
+      var streamIds = Object.keys(state.streams);
+      var streamOptions=[];
+      for(var i=0;i<streamIds.length;i++){
+        streamOptions.push(state.streams[streamIds[i]]);
+      }
+
+      streamOptions.sort((streamOption)=>{
+        return streamOption.order;
+      })
+
+      var renderedStreamList=[];
       for(h=0;h<state.height;h++){
         var colStreams = []; 
         for(w=0;w<state.width;w++){
-          id = h*state.width + w;
-          colStreams.push(state.streams[id]);
+          order = h*state.width + w;
+          colStreams.push(streamOptions[order]);
         }
-        streams.push(colStreams);
+        renderedStreamList.push(colStreams);
       }
-      return streams;
+      return renderedStreamList;
     },
-    style(state){
+    streamColStyle(state){
       return {
         width: (100/state.width)+'vw',
         height: (100/state.height)+'vh',
@@ -107,6 +125,9 @@ export default {
             }
           });
           break;
+        case "moveStream":
+          this.movingStream = streamOptions;
+          break;
       }
     },
     onStreamLoad(streamOptions){
@@ -117,6 +138,15 @@ export default {
           loading: false
         }
       })
+    },
+    moveStream(candidateStreamOptions){
+      if(candidateStreamOptions != this.movingStream){
+        this.$store.commit({
+          type: SWAP_STREAM_ORDER,
+          ids: [this.movingStream.id, candidateStreamOptions.id]
+        });
+      }
+      this.movingStream = null;
     }
   }
 }
