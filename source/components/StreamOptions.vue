@@ -2,12 +2,20 @@
   <Modal @close="onCloseModal" :options="modalOptions">
     <SeForm :validation="validationOptions">
       <div class="fields">
-        <Dropdown class="four wide" name="site" :items="sites" :value="options.site || 'twitch'" :label="$lang('streamOptions.site')"></Dropdown>
-        <SeInput class="twelve wide" name="channel" :value="options.channel" :label="$lang('streamOptions.channelId')"></SeInput>
+        <Dropdown class="four wide" name="site" :items="sites" :value="compOptions.site" :label="$lang('streamOptions.site')"></Dropdown>
+        <SeInput class="twelve wide" name="channel" :value="compOptions.channel" :label="$lang('streamOptions.channelId')"></SeInput>
       </div>
       <div class="fields">
-        <SeCheckbox class="four wide" name="openChat" :checked="(typeof options.openChat === 'undefined'? true: options.openChat)" label="&nbsp;">{{$lang('streamOptions.openChat')}}</SeCheckbox>
-        <SeInput class="twelve wide" name="transparency" :value="transparency" :label="$lang('streamOptions.chatTransparency')+' (0~100)'"></SeInput>
+        <SeCheckbox class="sixteen wide" name="openChat" :checked="compOptions.openChat" label="">{{$lang('streamOptions.openChat')}}</SeCheckbox>
+        
+      </div>
+      <div v-if="true">
+        <div class="fields">
+          <SeInput class="four wide" name="chatWidth" :value="compOptions.chatWidth" placeholder="0~50" :label="$lang('streamOptions.chatWidth')" suffix="%"></SeInput>
+          <SeInput class="four wide" name="transparency" :value="compOptions.transparency" placeholder="0~100" :label="$lang('streamOptions.chatTransparency')" suffix="%"></SeInput>
+          <Dropdown class="four wide" name="chatPosition" :items="chatPositionOptions" :value="compOptions.chatPosition" :label="$lang('streamOptions.chatPosition')"></Dropdown>
+          <SeCheckbox class="four wide" name="chatExpandOnHover" :checked="compOptions.chatExpandOnHover" label="&nbsp;">{{$lang('streamOptions.chatExpandOnHover')}}</SeCheckbox>
+        </div>
       </div>
       <div class="text violet"><i class="ui icon info circle large"></i> <span v-html="$lang('streamOptions.menuInfo', {icon: '<i class=\'large list layout icon blue\' ></i>'})"></span></div>
     </SeForm>
@@ -50,7 +58,8 @@ export default {
         fields: {
           channel: 'empty',
           site: 'empty',
-          transparency: 'integer[0..100]'
+          transparency: 'integer[0..100]',
+          chatWidth: 'integer[0..50]'
         }
       },
       sites: [
@@ -60,8 +69,25 @@ export default {
   },
 
   computed: {
-    transparency(){
-      return this.options.chatOpacity ? 100 - this.options.chatOpacity : 50;
+    compOptions(){
+      var options = Object.assign({
+        site: "Twitch",
+        openChat: true,
+        chatPosition: "right",
+        chatExpandOnHover: false,
+        chatWidth: 25
+      }, this.options);
+
+      options.transparency = this.options.chatOpacity ? 100 - this.options.chatOpacity : 50;
+
+      return options;
+
+    },
+    chatPositionOptions(){
+      return [
+        {text: this.$lang('common.left'), value: "left"},
+        {text: this.$lang('common.right'), value: "right"}
+      ]
     }
   },
 

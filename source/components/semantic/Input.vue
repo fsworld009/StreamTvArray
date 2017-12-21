@@ -1,7 +1,20 @@
 <template>
   <div class="field">
     <label ><h5 v-if="label" v-html="label"></h5></label>
-    <input class="ui input" :name="name" :value="value" :type="type"></input>
+    <div :class="'ui ' + (typeof suffix != 'undefined'? 'right labeled ':' ') + ' input ' + (disabled?'disabled ':' ')">
+      <input :class="(disabled?'disabled ':' ')" :name="name" :value="value" :type="type" :placeholder="placeholder"/>
+      <div v-if="typeof suffix != 'undefined'" class="ui basic label" v-html="suffix"></div>
+    </div>
+<!-- 
+
+    <template v-if="typeof suffix != 'undefined'">
+     
+    </template>
+    <template v-else>
+      <div :class="'ui input ' + (disabled?'disabled ':' ')">
+        <input :name="name" :value="value" :type="type" :placeholder="placeholder"/>
+      </div>
+    </template> -->
   </div>
 </template>
 
@@ -24,7 +37,12 @@ export default {
     },
     label: {
 
-    }
+    },
+    placeholder: {
+
+    },
+    suffix: {},
+    disabled:{}
   },
 }
 </script>

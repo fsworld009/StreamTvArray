@@ -3,7 +3,9 @@
         "apply": "套用",
         "cancel": "取消",
         "open": "開啟",
-        "language": "語言"
+        "language": "語言",
+        "left": "左",
+        "right": "右"
     },
     "arrayOptions":{
         "arraySize": "電視牆大小"
@@ -13,12 +15,14 @@
         "channelId": "頻道ID",
         "openChat": "開啟聊天室",
         "chatTransparency": "聊天室透明度",
-        "menuInfo": "點擊串流左上角的 {icon} 圖示可開啟設定選單"
+        "menuInfo": "點擊串流左上角的 {icon} 圖示可開啟設定選單",
+        "chatPosition": "聊天室位置",
+        "chatWidth": "聊天室寬",
+        "chatExpandOnHover": "滑鼠在聊天室上時延伸聊天室視窗至最大"
     },
     "stream": {
         "openStream": "開啟串流",
         "toggleChat": "顯示/隱藏聊天",
-        "moveChat": "移動聊天",
         "streamOptions": "串流設定",
         "arrayOptions": "電視牆設定",
         "moveStream": "移動串流",

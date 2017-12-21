@@ -104,6 +104,7 @@ var VueLang = {
     },
 
     __$forceUpdate: function(vm){
+        //https://github.com/kvdmolen/vue-lang/blob/master/index.js
         var i;
         for(i=0; i< vm._watchers.length; i++){
             vm._watchers[i].update();

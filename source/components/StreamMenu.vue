@@ -21,8 +21,7 @@ export default {
         iconClass: "big list blue",
         menuItems:[
           {icon: "comment", text: this.$lang("stream.toggleChat"), action:"toggleChat", disabled: !this.options.openChat},
-          {icon: "exchange", text: this.$lang("stream.moveStream"), action:"moveStream"},
-          {icon: "move", text: this.$lang("stream.moveChat"), action:"moveChat"},
+          {icon: "move", text: this.$lang("stream.moveStream"), action:"moveStream"},
           {icon: "setting", text: this.$lang("stream.streamOptions"), action:"streamOptions"},
           {icon: "puzzle", text: this.$lang("stream.arrayOptions"), action:"arrayOptions"},
           {color: "yellow", icon: "remove", text: this.$lang("stream.closeStream"), action:"closeStream"}
