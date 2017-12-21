@@ -13,11 +13,14 @@ A utility web page to allow you to watch multiple streams (currently only suppor
 - Auto load opened streams on page refresh as long as the tab is not closed
 
 ## Changelog
+- 12.21.2017:
+  - Add Multi Language support (only English and Traditional Chinese as of now)
+  - Add Move Stream feature, now you can move/swap stream location at any time
+  - Add new chat options: width, position, and automatically extending width on mouse hover
 - 12.13.2017: First version
 
 ## Todos
 - Test other browsers (mainly tested on Firefox as of now)
-- Multi language support
 - Export / Import array and stream settings
 - Support more sites (not top priority)
 

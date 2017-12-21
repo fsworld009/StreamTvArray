@@ -17,7 +17,13 @@
           </div>
           <div class="column">
             <h5 class="ui dividing header">{{$lang("info.changeLog")}}</h5>
-            12.13.2017: First version
+            <pre style="overflow:auto">
+12.21.2017:
+- Add Multi Language support (only English and Traditional Chinese as of now)
+- Add Move Stream feature, now you can move/swap stream location at any time
+- Add new chat options: width, position, and automatically extending width on mouse hover
+12.13.2017: First version
+            </pre>
             <!-- <h5 class="ui dividing header">Load Sessions</h5>
             <div class="ui grid">
               <div class="thirteen wide column">
