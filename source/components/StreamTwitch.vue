@@ -38,7 +38,7 @@ export default {
       this.$emit("streamLoad", this.options);
     },
     onHoverChat(hovered){
-      this.chatHover = hovered;
+      this.chatHover = hovered && this.options.chatExpandOnHover;
     }
   }
 }
