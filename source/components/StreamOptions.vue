@@ -152,6 +152,7 @@ export default {
         })
 
         var reloadFlag = this.options.channel != options.channel;
+        $el.modal("hide");
         this.$emit("close", reloadFlag);
       }
     }
