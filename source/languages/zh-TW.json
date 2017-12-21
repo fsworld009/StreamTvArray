@@ -22,10 +22,11 @@
         "streamOptions": "串流設定",
         "arrayOptions": "電視牆設定",
         "moveStream": "移動串流",
-        "closeStream": "關閉串流"
+        "closeStream": "關閉串流",
+        "moveHere": "移到此處"
     },
     "info":{
-        "changeLog": "更新紀錄",
+        "changeLog": "更新紀錄(英文)",
         "projectGitHub": "專案GitHub",
         "reportIssues": "回報問題"
     }

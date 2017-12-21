@@ -5,12 +5,12 @@
         <template v-for="stream in streamRow">
           <div :class="'stream-col '" :key="stream.id" :style="streamColStyle">
             <div v-if="stream.channel">
-              <div class="stream-col overlay-text stream-overlay" :style="streamColStyle" v-if="stream.loading">
+              <div class="stream-col overlay-text stream-overlay" :style="streamColStyle" v-if="streamLoading[stream.id]">
               <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
                 <h1 class="text white"><i class=" spinner loading icon"></i></h1>
               </div>
               <component :is="'StreamTwitch'" :options="stream"  :style="streamColStyle" @streamLoad="onStreamLoad"/>
-              <StreamMenu @select="onSelectMenu" :options="stream"/>
+              <StreamMenu @select="onSelectMenu" :options="stream" v-if="!movingStream" />
             </div>
             
             <div class="stream-col overlay-text open-stream-overlay" v-else-if="!movingStream" :style="streamColStyle" @click="openStreamOptions(stream)">
@@ -20,7 +20,7 @@
 
             <div class="stream-col overlay-text stream-overlay move-candidate" :style="streamColStyle" v-if="movingStream" @click="moveStream(stream)">
               <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
-              <h1 class="text white">Move To Here</h1>
+              <h1 class="text white">{{$lang('stream.moveHere')}}</h1>
             </div>
 
           </div>
@@ -48,10 +48,20 @@ export default {
     StreamMenu
   },
   data(){
-    return {
+    var data = {
       streamOptions: null,
       movingStream: null
     }
+    data.streamLoading = function(state){
+      var streamIds = Object.keys(state.streams);
+      var loadingMap={};
+      for(var i=0;i<streamIds.length;i++){
+        var streamId = streamIds[i];
+        loadingMap[streamId] = state.streams[streamId].channel? true: false
+      };
+      return loadingMap;
+    }(this.$store.state);
+    return data;
   },
   computed: mapState({
     width(state){
@@ -70,8 +80,8 @@ export default {
         streamOptions.push(state.streams[streamIds[i]]);
       }
 
-      streamOptions.sort((streamOption)=>{
-        return streamOption.order;
+      streamOptions.sort((streamOption1, streamOption2)=>{
+        return streamOption1.order > streamOption2.order? 1 : -1;
       })
 
       var renderedStreamList=[];
@@ -91,12 +101,16 @@ export default {
         height: (100/state.height)+'vh',
       }
     }
+    
   }),
   methods: {
     openStreamOptions(streamOptions){
       this.streamOptions = streamOptions;
     },
-    onCloseOptionsModal(){
+    onCloseOptionsModal(reloadFlag){
+      if(reloadFlag){
+        this.streamLoading[this.streamOptions.id] = true;
+      }
       this.streamOptions = null;
     },
     onSelectMenu(streamOptions, action){
@@ -131,13 +145,7 @@ export default {
       }
     },
     onStreamLoad(streamOptions){
-      this.$store.commit({
-        type: UPDATE_STREAM,
-        id: streamOptions.id,
-        options: {
-          loading: false
-        }
-      })
+      this.streamLoading[streamOptions.id] = false;
     },
     moveStream(candidateStreamOptions){
       if(candidateStreamOptions != this.movingStream){

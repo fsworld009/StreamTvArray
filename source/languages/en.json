@@ -22,7 +22,8 @@
         "streamOptions": "Stream Options",
         "arrayOptions": "Array Options",
         "moveStream": "Move Stream",
-        "closeStream": "Close Stream"
+        "closeStream": "Close Stream",
+        "moveHere": "Move To Here"
     },
     "info":{
         "changeLog": "Change Log",

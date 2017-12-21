@@ -21,14 +21,6 @@ var initialState =  Object.assign({
   //   savedSessions: []
   }, JSON.parse(session));
 
-
-Object.keys(initialState.streams).forEach((streamId)=>{
-    let streamOptions = initialState.streams[streamId];
-    if(streamOptions.loading === false){
-        streamOptions.loading = true;
-}
-});
-
 var defaultLangCode = "en";
 
 Vue.use(VueLang, {

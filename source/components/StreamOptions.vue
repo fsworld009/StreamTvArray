@@ -95,9 +95,7 @@ export default {
 
         var options = Object.assign({
           showChat: true
-        }, this.options, data, {
-          loading: this.options.channel != data.channel
-        });
+        }, this.options, data);
 
         // transparency to opacity
         data.transparency = data.transparency || 0;
@@ -114,7 +112,9 @@ export default {
           id: this.options.id,
           options: options
         })
-        this.$emit("close");
+
+        var reloadFlag = this.options.channel != options.channel;
+        this.$emit("close", reloadFlag);
       }
     }
   }

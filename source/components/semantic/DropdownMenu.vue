@@ -28,9 +28,7 @@ export default {
   }, 
   methods: {
     create(){
-      console.log("create", this.options)
       var $dropdown = $(this.$el);
-      console.log("$dropdown",$dropdown)
       var options = Object.assign({
         "onShow" (){
           //disable selected classes as this dropdown serves as a menu
