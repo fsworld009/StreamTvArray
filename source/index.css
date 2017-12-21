@@ -105,6 +105,10 @@
     height: 100%;
     z-index: 2;
   }
+
+  .stream-loading {
+      z-index: 0 !important;
+  }
   
   .ui.dropdown .menu > .item {
     padding: 5px!important;

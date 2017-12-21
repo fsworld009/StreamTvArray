@@ -5,7 +5,7 @@
         <template v-for="stream in streamRow">
           <div :class="'stream-col '" :key="stream.id" :style="streamColStyle">
             <div v-if="stream.channel">
-              <div class="stream-col overlay-text stream-overlay" :style="streamColStyle" v-if="streamLoading[stream.id]">
+              <div class="stream-col overlay-text stream-overlay stream-loading" :style="streamColStyle" v-if="streamLoading[stream.id]">
               <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
                 <h1 class="text white"><i class=" spinner loading icon"></i></h1>
               </div>
