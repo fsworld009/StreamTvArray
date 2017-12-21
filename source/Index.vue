@@ -19,7 +19,7 @@
 import Options from './components/Options.vue';
 import StreamContainer from './components/StreamContainer.vue';
 import {mapState, mapGetters} from 'vuex';
-import {LOAD_LANG} from './actions.js';
+import {LOAD_LANG_LIST, LOAD_LANG} from './actions.js';
 import {PAGE_LOADED} from './mutations.js';
 
 export default {
@@ -43,11 +43,21 @@ export default {
 
     //ajax calls on page load
     if(this.loading){
+      var $langListDeferred = $.Deferred(), $langDeferred = $.Deferred();
+      this.$store.dispatch({
+        type: LOAD_LANG_LIST,
+        callback: ()=>{
+          $langListDeferred.resolve();
+        }
+      });
       this.$store.dispatch({
         type: LOAD_LANG,
         callback: ()=>{
-          this.loading = false;
+         $langDeferred.resolve();
         }
+      });
+      $.when($langListDeferred, $langDeferred).then(()=>{
+        this.loading = false;
       });
     }
   },

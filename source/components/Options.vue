@@ -101,10 +101,7 @@ export default {
     },
 
     languages(state){
-      return [
-        {"value": "en", "text":"English"},
-        {"value": "zh-TW", "text":"繁體中文"}
-      ]
+      return state.langList
     }
   }),
 

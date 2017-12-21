@@ -15,7 +15,7 @@
         "channelId": "頻道ID",
         "openChat": "開啟聊天室",
         "chatTransparency": "聊天室透明度",
-        "menuInfo": "點擊串流左上角的 {icon} 圖示可開啟設定選單",
+        "menuInfo": "點擊串流上方的 {icon} 圖示可開啟設定選單",
         "chatPosition": "聊天室位置",
         "chatWidth": "聊天室寬",
         "chatExpandOnHover": "滑鼠在聊天室上時延伸聊天室視窗至最大"

@@ -15,7 +15,7 @@
         "channelId": "Channel ID",
         "openChat": "Open Chat",
         "chatTransparency": "Chat Transparency",
-        "menuInfo": "You can access options menu by clicking {icon} icon on top left hand side of the stream",
+        "menuInfo": "You can access options menu by clicking {icon} icon on top of the stream",
         "chatPosition": "Chat Position",
         "chatWidth": "Chat Width",
         "chatExpandOnHover": "Expand chat width to maximum on mouse hover"

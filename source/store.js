@@ -4,8 +4,8 @@ import VueLang from "./plugins/vue-lang.js";
 
 Vue.use(Vuex);
 // var _ = require("lodash");
-import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS, UPDATE_LANG, CHANGE_LANG_CODE, SWAP_STREAM_ORDER} from "./mutations.js";
-import {LOAD_LANG} from "./actions.js";
+import {RESET_ARRAY, UPDATE_STREAM, SHOW_ARRAY_OPTIONS, UPDATE_LANG, UPDATE_LANG_LIST, CHANGE_LANG_CODE, SWAP_STREAM_ORDER} from "./mutations.js";
+import {LOAD_LANG_LIST, LOAD_LANG} from "./actions.js";
 
 
 const sessionStorageKey = 'StreamTvArray';
@@ -22,6 +22,7 @@ var initialState =  Object.assign({
   }, JSON.parse(session));
 
 var defaultLangCode = "en";
+initialState.langList = [];
 
 Vue.use(VueLang, {
     langCode: initialState.langCode,
@@ -56,6 +57,17 @@ const store = new Vuex.Store({
     //   }
     },
     actions:{
+        [LOAD_LANG_LIST]({ commit, state }, payload){
+            $.getJSON("./languages/langCodes.json", function(langList){
+                commit({
+                    type: UPDATE_LANG_LIST,
+                    langList: langList
+                });
+                if(typeof payload.callback == "function"){
+                    payload.callback();
+                }
+            });
+        },
         [LOAD_LANG]({ commit, state }, payload){
             var $defaultLangPromise;
             
@@ -127,6 +139,9 @@ const store = new Vuex.Store({
           stream1.order = stream2.order;
           stream2.order = temp;
           saveSession(state);
+      },
+      [UPDATE_LANG_LIST](state, payload){
+          state.langList = payload.langList;
       }
     }
   });
