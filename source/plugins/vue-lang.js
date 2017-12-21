@@ -117,5 +117,4 @@ var VueLang = {
     }
 };
 
-console.log("VueLang",VueLang);
 export default VueLang;

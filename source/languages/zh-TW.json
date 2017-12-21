@@ -1,1 +1,32 @@
-{}
+{
+    "common":{
+        "apply": "套用",
+        "cancel": "取消",
+        "open": "開啟",
+        "language": "語言"
+    },
+    "arrayOptions":{
+        "arraySize": "電視牆大小"
+    },
+    "streamOptions":{
+        "site":"網站",
+        "channelId": "頻道ID",
+        "openChat": "開啟聊天室",
+        "chatTransparency": "聊天室透明度",
+        "menuInfo": "點擊在串流左上角的 {icon} 圖示可開啟設定選單"
+    },
+    "stream": {
+        "openStream": "開啟串流",
+        "toggleChat": "顯示/隱藏聊天",
+        "moveChat": "移動聊天",
+        "streamOptions": "串流設定",
+        "arrayOptions": "電視牆設定",
+        "moveStream": "移動串流",
+        "closeStream": "關閉串流"
+    },
+    "info":{
+        "changeLog": "更新紀錄",
+        "projectGitHub": "專案GitHub",
+        "reportIssues": "回報問題"
+    }
+}

@@ -18,15 +18,15 @@ export default {
       type: Object
     }
   },
-  computed: {
-    menuItems(){ 
-      return [
-        {icon: "comment", text: "Toggle Chat", action:"toggleChat", disabled: !this.options.openChat},
-        {icon: "setting", text: "Stream Options", action:"streamOptions"},
-        {icon: "puzzle", text: "Array Options", action:"arrayOptions"},
-        {color: "yellow", icon: "remove", text: "Close Stream", action:"closeStream"}
-      ];
-    }
+  data() {
+    return {
+      menuItems:[
+        {icon: "comment", text: this.$lang("stream.toggleChat"), action:"toggleChat", disabled: !this.options.openChat},
+        {icon: "setting", text: this.$lang("stream.streamOptions"), action:"streamOptions"},
+        {icon: "puzzle", text: this.$lang("stream.arrayOptions"), action:"arrayOptions"},
+        {color: "yellow", icon: "remove", text: this.$lang("stream.closeStream"), action:"closeStream"}
+      ]
+    };
   },
   mounted(){
     $(this.$el).find(".ui.dropdown").dropdown({
@@ -39,6 +39,14 @@ export default {
 
   beforeDestroy(){
     $(this.$el).find(".ui.dropdown").dropdown('destroy')
+  },
+
+  create(){
+
+  },
+
+  destroy(){
+
   },
 
   methods: {

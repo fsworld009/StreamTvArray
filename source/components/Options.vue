@@ -5,18 +5,18 @@
         <div class="two column row">
           <div class="column">
             <SeForm :validation="validationOptions">
-              <h5 class="ui dividing header">Array Size</h5>
+              <h5 class="ui dividing header">{{$lang("arrayOptions.arraySize")}}</h5>
               <div class="fields">
                 <SeInput class="four wide" name="width" :value="width" size="2" label=""/>  
               <div class="one wide field"><div style="position:relative;top:35%">x</div></div>
                 <SeInput class="four wide" name="height" :value="height" size="2" label=""/>
-                 <div class="four wide field"><div style="position:relative;top:15%"><SeButton class="green" @click="changeArraySize">Apply</SeButton></div></div>
+                 <div class="four wide field"><div style="position:relative;top:15%"><SeButton class="green" @click="changeArraySize">{{$lang("common.apply")}}</SeButton></div></div>
               </div>
             </SeForm>
             <Dropdown class="" name="langCode" :items="languages" :value="$lang.langCode()" label="Language" @change="onLangCodeChange"></Dropdown>
           </div>
           <div class="column">
-            <h5 class="ui dividing header">Change log</h5>
+            <h5 class="ui dividing header">{{$lang("info.changeLog")}}</h5>
             12.13.2017: First version
             <!-- <h5 class="ui dividing header">Load Sessions</h5>
             <div class="ui grid">
@@ -33,19 +33,13 @@
       <div class="ui divider"></div>
       <div class="ui">
         by <a href="https://github.com/fsworld009/" target="_blank">fsworld009</a>
-        <i class="ui large icon github"></i><a href="https://github.com/fsworld009/StreamTvArray" target="_blank">Project GitHub</a>
-        <i class="ui large icon warning circle"></i><a href="https://github.com/fsworld009/StreamTvArray/issues/" target="_blank">Report issues</a>
+        <i class="ui large icon github"></i><a href="https://github.com/fsworld009/StreamTvArray" target="_blank">{{$lang("info.projectGitHub")}}</a>
+        <i class="ui large icon warning circle"></i><a href="https://github.com/fsworld009/StreamTvArray/issues/" target="_blank">{{$lang("info.reportIssues")}}</a>
       </div> 
       
 
   </Modal>
 </template>
-
-<<style scoped>
-/* .ui.form input[type="text"][name="width"], .ui.form input[type="text"][name="height"]{
-  width: 50px;
-} */
-</style>
 
 
 <script>
@@ -101,7 +95,7 @@ export default {
       var closeble = state.width != 0 && state.height != 0;
       return {
         title: "Stream TV Array",
-        closable: closeble,
+        closeIcon: closeble,
         closeIcon: closeble
       };
     },

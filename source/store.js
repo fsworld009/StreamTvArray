@@ -45,7 +45,6 @@ function saveSession(state){
 
 function loadLang(langCode, commit){
     return $.getJSON("./languages/"+langCode+".json", function(messages){
-        console.log("loaded", langCode, messages);
         commit({
             type: UPDATE_LANG,
             langCode: langCode,
@@ -66,7 +65,6 @@ const store = new Vuex.Store({
     },
     actions:{
         [LOAD_LANG]({ commit, state }, payload){
-            console.log(commit, state, payload);
             var $defaultLangPromise;
             
             if(!Vue.$lang.loaded(defaultLangCode)){
@@ -81,8 +79,7 @@ const store = new Vuex.Store({
                 }else{
                     return $.Deferred().resolve();
                 }
-            }).then(()=>{
-                console.log("resolved");
+            }).always(()=>{
                 if(typeof payload.callback == "function"){
                     payload.callback();
                 }

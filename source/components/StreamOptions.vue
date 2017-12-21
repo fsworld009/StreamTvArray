@@ -2,14 +2,14 @@
   <Modal @close="onCloseModal" :options="modalOptions">
     <SeForm :validation="validationOptions">
       <div class="fields">
-        <Dropdown class="four wide" name="site" :items="sites" :value="options.site || 'twitch'" label="Site"></Dropdown>
-        <SeInput class="twelve wide" name="channel" :value="options.channel" label="Channel ID"></SeInput>
+        <Dropdown class="four wide" name="site" :items="sites" :value="options.site || 'twitch'" :label="$lang('streamOptions.site')"></Dropdown>
+        <SeInput class="twelve wide" name="channel" :value="options.channel" :label="$lang('streamOptions.channelId')"></SeInput>
       </div>
       <div class="fields">
-        <SeCheckbox class="four wide" name="openChat" :checked="(typeof options.openChat === 'undefined'? true: options.openChat)" label="&nbsp;">Open Chat</SeCheckbox>
-        <SeInput class="twelve wide" name="transparency" :value="transparency" label="Chat Transparency (0~100)"></SeInput>
+        <SeCheckbox class="four wide" name="openChat" :checked="(typeof options.openChat === 'undefined'? true: options.openChat)" label="&nbsp;">{{$lang('streamOptions.openChat')}}</SeCheckbox>
+        <SeInput class="twelve wide" name="transparency" :value="transparency" :label="$lang('streamOptions.chatTransparency')+' (0~100)'"></SeInput>
       </div>
-      <div class="text violet"><i class="ui icon info circle large"></i> You can access options menu by clicking  <i class="large list layout icon blue" ></i> icon on top left hand side of the stream</div>
+      <div class="text violet"><i class="ui icon info circle large"></i> <span v-html="$lang('streamOptions.menuInfo', {icon: '<i class=\'large list layout icon blue\' ></i>'})"></span></div>
     </SeForm>
   </Modal>
 </template>
@@ -40,10 +40,10 @@ export default {
     return {
       modalOptions: {
         closeIcon: true,
-        title: this.options.channel? "Stream Options" : "Open Stream",
+        title: this.$lang(this.options.channel?  "stream.streamOptions" : "stream.openStream"),
         actions: [
-          {text: this.options.channel? "Apply" : "Open", styleClasses: "green", action: this.applyOption.bind(this)},
-          {text: "Cancel", styleClasses: "red cancel"}
+          {text: this.$lang(this.options.channel? "common.apply" : "common.open"), styleClasses: "green", action: this.applyOption.bind(this)},
+          {text: this.$lang("common.cancel"), styleClasses: "red cancel"}
         ]
       },
       validationOptions: {

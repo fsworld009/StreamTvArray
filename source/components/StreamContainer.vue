@@ -15,7 +15,7 @@
           
           <div class="stream-col overlay-text open-stream-overlay" :key="col" v-else :style="style" @click="openStreamOptions(stream)">
             <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
-            <h1 class="text white">Open Stream</h1>
+            <h1 class="text white">{{$lang("stream.openStream")}}</h1>
           </div>
         </template>
       </div>
