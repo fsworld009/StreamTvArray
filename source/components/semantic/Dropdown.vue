@@ -1,7 +1,7 @@
 <template>
   <div class="field">
     <label ><h5 v-if="label" v-html="label"></h5></label>
-    <div class="ui search fluid selection dropdown">
+    <div :class="'ui search fluid selection dropdown '+ (disabled? 'disabled ':'')">
       <input :name="name" type="hidden" :value="value">
       <i class="dropdown icon"></i>
       <div class="default text">{{placeholder}}</div>
@@ -37,7 +37,8 @@ export default {
     },
     label: {
 
-    }
+    },
+    disabled:{}
   },
   mounted() {
     this.create();

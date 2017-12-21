@@ -13,7 +13,7 @@
                  <div class="four wide field"><div style="position:relative;top:15%"><SeButton class="green" @click="changeArraySize">{{$lang("common.apply")}}</SeButton></div></div>
               </div>
             </SeForm>
-            <Dropdown class="" name="langCode" :items="languages" :value="$lang.langCode()" :label="$lang('common.language')" @change="onLangCodeChange"></Dropdown>
+            <Dropdown class="" name="langCode" :items="languages" :value="$lang.langCode()" :label="$lang('common.language')" @change="onLangCodeChange" :disabled="disableLangList"></Dropdown>
           </div>
           <div class="column">
             <h5 class="ui dividing header">{{$lang("info.changeLog")}}</h5>
@@ -76,7 +76,8 @@ export default {
           width: 'regExp[/[1-9][0-9]*/]',
           height: 'regExp[/[1-9][0-9]*/]'
         }
-      }
+      },
+      disableLangList: false
     }
   },
   computed: mapState({
@@ -145,6 +146,7 @@ export default {
     },
 
     onLangCodeChange(value, text, $choice){
+      this.disableLangList = true;
       this.$store.dispatch({
         type: LOAD_LANG,
         langCode: value,
@@ -153,6 +155,7 @@ export default {
             type: CHANGE_LANG_CODE,
             langCode: value
           });
+          this.disableLangList = false;
         }
       });
       
