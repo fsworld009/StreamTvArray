@@ -104,8 +104,12 @@ var VueLang = {
     },
 
     __$forceUpdate: function(vm){
+        var i;
+        for(i=0; i< vm._watchers.length; i++){
+            vm._watchers[i].update();
+        }
         vm.$forceUpdate();
-        for(var i=0; i< vm.$children.length; i++){
+        for(i=0; i< vm.$children.length; i++){
             this.__$forceUpdate(vm.$children[i]);
         }
     },
