@@ -111,7 +111,7 @@ export default {
 
 
       if($form.form("is valid")){
-        $el.find('form').find('input:visible, textarea:visible').each(function(i, input) {
+        $el.find('form').find('input, textarea').each(function(i, input) {
           var $input = $(input);
           var inputType = $(this).attr("type");
           var name = $input.attr("name");

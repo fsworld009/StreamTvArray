@@ -71,9 +71,9 @@
   
   .chat-container {
     position: absolute;
-    right: 0;
+    /* right: 0; */
     top: 0;
-    width: 25%;
+    /* width: 25%; */
     height: 100%;
     z-index: 3;
     /* opacity: 0; */
@@ -90,7 +90,7 @@
   
   .stream-menu {
     position: absolute;
-    left: 5px;
+    /* left: 5px; */
     top: 5px;
     z-index: 4;
     opacity: 0;

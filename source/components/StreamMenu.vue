@@ -1,6 +1,6 @@
 <template>
-  <div class="stream-menu">
-    <DropdownMenu class="top left" :options="menuOptions" @click="onClickMenuItem"></DropdownMenu>
+  <div class="stream-menu" :style="menuStyle">
+    <DropdownMenu :class="'top '+position" :options="menuOptions" @click="onClickMenuItem"></DropdownMenu>
   </div>
 </template>
 
@@ -27,6 +27,14 @@ export default {
           {color: "yellow", icon: "remove", text: this.$lang("stream.closeStream"), action:"closeStream"}
         ]
       };
+    },
+    position(){
+      return this.options.chatPosition=="left"?"right":"left";
+    },
+    menuStyle(){
+      return {
+        [this.position]: "5px"
+      }
     }
   },
 
