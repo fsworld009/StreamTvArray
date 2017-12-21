@@ -149,10 +149,20 @@ export default {
     },
     moveStream(candidateStreamOptions){
       if(candidateStreamOptions != this.movingStream){
+
+        //iframe will be reloaded on swap
+        if(candidateStreamOptions.channel){
+          this.streamLoading[candidateStreamOptions.id] = true;
+        }
+        if(this.movingStream.channel){
+          this.streamLoading[this.movingStream.id] = true;
+        }
+
         this.$store.commit({
           type: SWAP_STREAM_ORDER,
           ids: [this.movingStream.id, candidateStreamOptions.id]
         });
+
       }
       this.movingStream = null;
     }
