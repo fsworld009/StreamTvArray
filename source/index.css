@@ -106,6 +106,10 @@
     z-index: 2;
   }
 
+  .move-candidate {
+      z-index: 4;
+  }
+    
   .stream-loading {
       z-index: 0 !important;
   }

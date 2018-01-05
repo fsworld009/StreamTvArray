@@ -18,6 +18,9 @@
           <div class="column">
             <h5 class="ui dividing header">{{$lang("info.changeLog")}}</h5>
             <pre style="overflow:auto">
+01.05.2018:
+- Change color scheme
+- Fix: Chat box was above the "Move To Here" rectangle
 12.21.2017:
 - Add Multi Language support (only English and Traditional Chinese as of now)
 - Add Move Stream feature, now you can move/swap stream location at any time

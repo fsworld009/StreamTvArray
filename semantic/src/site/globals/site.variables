@@ -5,3 +5,26 @@
 @computerBreakpoint             : 992px;
 @largeMonitorBreakpoint         : 1200px;
 @widescreenMonitorBreakpoint    : 1920px;
+
+/* Material Theme Color rewrite */
+/* https://materialuicolors.co/ Level 500 & 200 */
+/*---  Colors  ---*/
+@blue             : #2196F3;
+@green            : #4CAF50;
+@grey             : #9E9E9E;
+@orange           : #FF9800;
+@pink             : #E91E63;
+@purple           : #9C27B0;
+@red              : #F44336;
+@teal             : #009688;
+@yellow           : #FFEB3B;
+
+/*---  Light Colors  ---*/
+@lightBlue        : #90CAF9;
+@lightGreen       : #A5D6A7;
+@lightOrange      : #FFCC80;
+@lightPink        : #F48FB1;
+@lightPurple      : #CE93D8;
+@lightRed         : #EF9A9A;
+@lightTeal        : #80CBC4;
+@lightYellow      : #FFF59D;

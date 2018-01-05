@@ -13,6 +13,9 @@ A utility web page to allow you to watch multiple streams (currently only suppor
 - Auto load opened streams on page refresh as long as the tab is not closed
 
 ## Changelog
+- 01.05.2018:
+  - Change color scheme
+  - Fix: Chat box was above the "Move To Here" rectangle
 - 12.21.2017:
   - Add Multi Language support (only English and Traditional Chinese as of now)
   - Add Move Stream feature, now you can move/swap stream location at any time
