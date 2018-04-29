@@ -2,7 +2,7 @@
   <div class="stream-cell">
     <iframe class="stream" :src="'https://player.twitch.tv/?channel='+options.channel" frameborder="0" allowfullscreen="true" scrolling="no" @load="onStreamLoad"></iframe>
     <div class="chat-container" :style="[chatStyle, {width: chatHover?'50%':chatStyle.width} ]" v-if="options.openChat" @mouseenter="onHoverChat(true)" @mouseleave="onHoverChat(false)">
-      <iframe :src="'http://www.twitch.tv/embed/'+options.channel+'/chat'" frameborder="0" scrolling="no"></iframe>
+      <iframe :src="'https://www.twitch.tv/embed/'+options.channel+'/chat'" frameborder="0" scrolling="no"></iframe>
     </div>
   </div>
 </template>
