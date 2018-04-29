@@ -18,6 +18,8 @@
           <div class="column">
             <h5 class="ui dividing header">{{$lang("info.changeLog")}}</h5>
             <pre style="overflow:auto">
+04.29.2018:
+- Fix Twitch chat URL
 01.05.2018:
 - Change color scheme
 - Fix: Chat box was above the "Move To Here" rectangle
