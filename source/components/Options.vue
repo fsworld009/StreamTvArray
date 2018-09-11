@@ -18,6 +18,8 @@
           <div class="column">
             <h5 class="ui dividing header">{{$lang("info.changeLog")}}</h5>
             <pre style="overflow:auto">
+09.12.2018:
+- Fix transparency resets to 50 on reopen options screen after setting it to 100
 04.29.2018:
 - Fix Twitch chat URL
 01.05.2018:

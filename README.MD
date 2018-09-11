@@ -13,6 +13,8 @@ A utility web page to allow you to watch multiple streams (currently only suppor
 - Auto load opened streams on page refresh as long as the tab is not closed
 
 ## Changelog
+- 09.12.2018:
+  - Fix transparency resets to 50 on reopen options screen after setting it to 100
 - 04.29.2018:
   - Fix Twitch chat URL
 - 01.05.2018:

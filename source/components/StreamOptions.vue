@@ -79,7 +79,7 @@ export default {
         chatWidth: 25
       }, this.options);
 
-      options.transparency = this.options.chatOpacity ? 100 - this.options.chatOpacity : 50;
+      options.transparency = typeof this.options.chatOpacity !== 'undefined' ? 100 - this.options.chatOpacity : 50;
 
       this.showChatDetailOptions = options.openChat;
 
