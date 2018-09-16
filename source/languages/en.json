@@ -12,7 +12,7 @@
     },
     "streamOptions":{
         "site":"Site",
-        "channelId": "Channel ID",
+        "channelId": "Channel ID (Use string after '?v=' in the URL for Youtube)",
         "openChat": "Open Chat",
         "chatTransparency": "Chat Transparency",
         "menuInfo": "You can access options menu by clicking {icon} icon on top of the stream",

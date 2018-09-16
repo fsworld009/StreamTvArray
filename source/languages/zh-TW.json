@@ -12,7 +12,7 @@
     },
     "streamOptions":{
         "site":"網站",
-        "channelId": "頻道ID",
+        "channelId": "頻道ID (Youtube 為網址最後 '?v=' 後面的英數字串)",
         "openChat": "開啟聊天室",
         "chatTransparency": "聊天室透明度",
         "menuInfo": "點擊串流上方的 {icon} 圖示可開啟設定選單",

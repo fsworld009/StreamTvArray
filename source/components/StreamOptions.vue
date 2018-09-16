@@ -63,7 +63,8 @@ export default {
         }
       },
       sites: [
-        {text: "Twitch", value: "twitch"}
+        {text: "Twitch", value: "twitch"},
+        {text: "Youtube", value: "youtube"}
       ],
       showChatDetailOptions: false
     }

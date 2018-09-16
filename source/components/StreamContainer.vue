@@ -9,7 +9,7 @@
               <!-- <i class="add circle icon inverted" :style="{fontSize: (100/height)+'vh'}"></i> -->
                 <h1 class="text white"><i class=" spinner loading icon"></i></h1>
               </div>
-              <component :is="'StreamTwitch'" :options="stream"  :style="streamColStyle" @streamLoad="onStreamLoad"/>
+              <component :is="siteComponents[stream.site]" :options="stream"  :style="streamColStyle" @streamLoad="onStreamLoad"/>
               <StreamMenu @select="onSelectMenu" :options="stream" v-if="!movingStream" />
             </div>
             
@@ -37,6 +37,7 @@
 <script>
 import {mapState} from 'vuex';
 import StreamTwitch from './StreamTwitch.vue';
+import StreamYoutube from './StreamYoutube.vue';
 import StreamOptions from './StreamOptions.vue';
 import StreamMenu from './StreamMenu.vue';
 import {UPDATE_STREAM, SHOW_ARRAY_OPTIONS, SWAP_STREAM_ORDER} from '../mutations.js';
@@ -45,10 +46,15 @@ export default {
   components: {
     StreamOptions,
     StreamTwitch,
+    StreamYoutube,
     StreamMenu
   },
   data(){
     var data = {
+      siteComponents: {
+        twitch: 'StreamTwitch',
+        youtube: 'StreamYoutube',
+      },
       streamOptions: null,
       movingStream: null
     }
