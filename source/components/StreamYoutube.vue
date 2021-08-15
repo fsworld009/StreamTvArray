@@ -2,7 +2,7 @@
   <div class="stream-cell">
     <iframe class="stream" :src="'https://www.youtube.com/embed/'+options.channel+'?rel=0&amp;showinfo=0'" frameborder="0" allowfullscreen="true" scrolling="no" @load="onStreamLoad" allow="autoplay; encrypted-media"></iframe>
     <div class="chat-container" :style="[chatStyle, {width: chatHover?'50%':chatStyle.width} ]" v-if="options.openChat" @mouseenter="onHoverChat(true)" @mouseleave="onHoverChat(false)">
-      <iframe :src="'https://www.youtube.com/live_chat?v='+options.channel+'&embed_domain=fsworld009.github.io'" frameborder="0" scrolling="no" allow="autoplay; encrypted-media"></iframe>
+      <iframe :src="'https://gaming.youtube.com/live_chat?v='+options.channel+'&embed_domain='+host" frameborder="0" scrolling="no" allow="autoplay; encrypted-media"></iframe>
     </div>
   </div>
 </template>
@@ -17,7 +17,8 @@ export default {
   },
   data(){
     return {
-      chatHover: false
+      chatHover: false,
+      host: location.hostname
     }
   },
   computed: {
