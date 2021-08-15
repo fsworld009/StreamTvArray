@@ -18,6 +18,9 @@
           <div class="column">
             <h5 class="ui dividing header">{{$lang("info.changeLog")}}</h5>
             <pre style="overflow:auto">
+08.15.2021:
+- Fixed Twitch embed script
+- Applied dark theme to chats 
 09.16.2018:
 - Support Youtube Live
 09.12.2018:
